@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "title": "Билеты Москва ⇄ Испания",
+    "dates": "28.08.2026 – 11.09.2026",
+    "passengers": 2,
+    "note": "Для сравнения: пересадка в Анкаре была с 9:10 до 17:40 — это 8:30."
+  },
+  "outbound": [
+    {
+      "id": "out-A",
+      "title": "Вариант A — через Измир (Turkish)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Барселона",
+      "airlines": "Turkish Airlines + SunExpress",
+      "price": 111729,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "2:25", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "11:10", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "3:45", "airline": "Turkish Airlines", "link": "https://avs.io/AlXy", "price": 55316 },
+        { "depDate": "28.08.2026", "depTime": "18:55", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "21:35", "to": "Барселона", "stops": "Прямой", "stopHours": "7:45", "airline": "SunExpress", "link": "https://avs.io/AmXp", "price": 49262 },
+        { "depDate": "29.08.2026", "depTime": "20:00", "from": "Барселона", "arrDate": "29.08.2026", "arrTime": "23:44", "to": "Мадрид", "stops": "Прямой", "stopHours": "22:25", "airline": "Поезд", "link": "https://www.renfe.com/es/es", "price": 7151 }
+      ]
+    },
+    {
+      "id": "out-B",
+      "title": "Вариант B — через Измир (Pegasus до Измира)",
+      "badge": null,
+      "dest": "Барселона",
+      "airlines": "Pegasus + SunExpress",
+      "price": 119970,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "5:55", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "Pegasus", "link": "https://short-url.cc/1sPL2", "price": 63557 },
+        { "depDate": "28.08.2026", "depTime": "18:55", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "21:35", "to": "Барселона", "stops": "Прямой", "stopHours": "13:00", "airline": "SunExpress", "link": "https://avs.io/AmXp", "price": 49262 },
+        { "depDate": "29.08.2026", "depTime": "20:00", "from": "Барселона", "arrDate": "29.08.2026", "arrTime": "23:44", "to": "Мадрид", "stops": "Прямой", "stopHours": "22:25", "airline": "Поезд", "link": "https://www.renfe.com/es/es", "price": 7151 }
+      ]
+    },
+    {
+      "id": "out-C",
+      "title": "Вариант C — через Измир (Ajet, пересадка в Анкаре)",
+      "badge": "пересадка в Анкаре",
+      "dest": "Барселона",
+      "airlines": "Ajet + SunExpress",
+      "price": 99208,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "5:05", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "11:50", "to": "Измир", "stops": "1 (Анкара)", "stopHours": "1:10", "airline": "Ajet", "link": "https://avs.io/An04", "price": 42795 },
+        { "depDate": "28.08.2026", "depTime": "18:55", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "21:35", "to": "Барселона", "stops": "Прямой", "stopHours": "7:05", "airline": "SunExpress", "link": "https://avs.io/AmXp", "price": 49262 },
+        { "depDate": "29.08.2026", "depTime": "20:00", "from": "Барселона", "arrDate": "29.08.2026", "arrTime": "23:44", "to": "Мадрид", "stops": "Прямой", "stopHours": "22:25", "airline": "Поезд", "link": "https://www.renfe.com/es/es", "price": 7151 }
+      ]
+    },
+    {
+      "id": "out-D",
+      "title": "Вариант D — через Измир (Ajet, Стамбул)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Барселона",
+      "airlines": "Ajet + Turkish Airlines + SunExpress",
+      "price": 99529,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "9:25", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "2:15", "airline": "Ajet + Turkish Airlines", "link": "https://avs.io/BmiH", "price": 43116 },
+        { "depDate": "28.08.2026", "depTime": "18:55", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "21:35", "to": "Барселона", "stops": "Прямой", "stopHours": "9:30", "airline": "SunExpress", "link": "https://avs.io/AmXp", "price": 49262 },
+        { "depDate": "29.08.2026", "depTime": "20:00", "from": "Барселона", "arrDate": "29.08.2026", "arrTime": "23:44", "to": "Мадрид", "stops": "Прямой", "stopHours": "22:25", "airline": "Поезд", "link": "https://www.renfe.com/es/es", "price": 7151 }
+      ]
+    },
+    {
+      "id": "out-E",
+      "title": "Вариант E — через Измир (Ajet)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Мадрид",
+      "airlines": "Ajet + Turkish Airlines + SunExpress",
+      "price": 91972,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "9:25", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "2:15", "airline": "Ajet + Turkish Airlines", "link": "https://avs.io/BmiH", "price": 43116 },
+        { "depDate": "28.08.2026", "depTime": "15:20", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "18:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "5:55", "airline": "SunExpress", "link": "https://avs.io/Bmld", "price": 48856 }
+      ]
+    },
+    {
+      "id": "out-F",
+      "title": "Вариант F — через Измир (Turkish)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Мадрид",
+      "airlines": "Turkish Airlines + SunExpress",
+      "price": 104172,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "2:25", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "11:10", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "3:45", "airline": "Turkish Airlines", "link": "https://avs.io/AlXy", "price": 55316 },
+        { "depDate": "28.08.2026", "depTime": "15:20", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "18:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "4:10", "airline": "SunExpress", "link": "https://avs.io/Bmld", "price": 48856 }
+      ]
+    },
+    {
+      "id": "out-G",
+      "title": "Вариант G — через Измир (Pegasus)",
+      "badge": null,
+      "dest": "Мадрид",
+      "airlines": "Pegasus + SunExpress",
+      "price": 112413,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "5:55", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "Pegasus", "link": "https://short-url.cc/1sPL2", "price": 63557 },
+        { "depDate": "28.08.2026", "depTime": "15:20", "from": "Измир", "arrDate": "28.08.2026", "arrTime": "18:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "9:25", "airline": "SunExpress", "link": "https://avs.io/Bmld", "price": 48856 }
+      ]
+    },
+    {
+      "id": "out-H",
+      "title": "Вариант H — напрямую в Мадрид (Pegasus)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Мадрид",
+      "airlines": "Pegasus",
+      "price": 91010,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "4:00", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "13:30", "to": "Мадрид", "stops": "1 (Стамбул)", "stopHours": "1:50", "airline": "Pegasus", "link": "https://avs.io/AmO1", "price": 91010 }
+      ]
+    },
+    {
+      "id": "out-I",
+      "title": "Вариант I — 2 ночи в Измире (Turkish, как в A)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Мадрид",
+      "airlines": "Turkish Airlines + Pegasus",
+      "price": 97108,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "2:25", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "11:10", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "3:45", "airline": "Turkish Airlines", "link": "https://avs.io/AlXy", "price": 55316 },
+        { "depDate": "30.08.2026", "depTime": "09:20", "from": "Измир", "arrDate": "30.08.2026", "arrTime": "12:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "46:10", "airline": "Pegasus Airlines", "link": "https://avs.io/BPUY", "price": 41792 }
+      ]
+    },
+    {
+      "id": "out-J",
+      "title": "Вариант J — 2 ночи в Измире (Pegasus, как в B)",
+      "badge": null,
+      "dest": "Мадрид",
+      "airlines": "Pegasus",
+      "price": 105349,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "5:55", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "Pegasus", "link": "https://short-url.cc/1sPL2", "price": 63557 },
+        { "depDate": "30.08.2026", "depTime": "09:20", "from": "Измир", "arrDate": "30.08.2026", "arrTime": "12:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "51:25", "airline": "Pegasus Airlines", "link": "https://avs.io/BPUY", "price": 41792 }
+      ]
+    },
+    {
+      "id": "out-K",
+      "title": "Вариант K — 2 ночи в Измире (Ajet через Анкару, как в C)",
+      "badge": "пересадка в Анкаре",
+      "dest": "Мадрид",
+      "airlines": "Ajet + Pegasus",
+      "price": 84587,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "5:05", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "11:50", "to": "Измир", "stops": "1 (Анкара)", "stopHours": "1:10", "airline": "Ajet", "link": "https://avs.io/An04", "price": 42795 },
+        { "depDate": "30.08.2026", "depTime": "09:20", "from": "Измир", "arrDate": "30.08.2026", "arrTime": "12:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "45:30", "airline": "Pegasus Airlines", "link": "https://avs.io/BPUY", "price": 41792 }
+      ]
+    },
+    {
+      "id": "out-L",
+      "title": "Вариант L — 2 ночи в Измире (Ajet + Turkish, как в D)",
+      "badge": "пересадка в Стамбуле",
+      "dest": "Мадрид",
+      "airlines": "Ajet + Turkish Airlines + Pegasus",
+      "price": 84908,
+      "segments": [
+        { "depDate": "28.08.2026", "depTime": "1:45", "from": "Москва", "arrDate": "28.08.2026", "arrTime": "9:25", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "2:15", "airline": "Ajet + Turkish Airlines", "link": "https://avs.io/BmiH", "price": 43116 },
+        { "depDate": "30.08.2026", "depTime": "09:20", "from": "Измир", "arrDate": "30.08.2026", "arrTime": "12:45", "to": "Мадрид", "stops": "Прямой", "stopHours": "47:55", "airline": "Pegasus Airlines", "link": "https://avs.io/BPUY", "price": 41792 }
+      ]
+    }
+  ],
+  "back": [
+    {
+      "id": "back-A",
+      "title": "Вариант A — из Севильи",
+      "badge": "пересадка в Стамбуле",
+      "origin": "Севилья",
+      "airlines": "Pegasus",
+      "price": 52818,
+      "segments": [
+        { "depDate": "11.09.2026", "depTime": "15:45", "from": "Севилья", "arrDate": "12.09.2026", "arrTime": "2:55", "to": "Москва", "stops": "1 (Стамбул)", "stopHours": "1:45", "airline": "Pegasus", "link": "https://avs.io/AmAT", "price": 52818 }
+      ]
+    },
+    {
+      "id": "back-B",
+      "title": "Вариант B — из Мадрида",
+      "badge": "пересадка в Стамбуле",
+      "origin": "Мадрид",
+      "airlines": "Turkish Airlines",
+      "price": 83578,
+      "segments": [
+        { "depDate": "11.09.2026", "depTime": "18:25", "from": "Мадрид", "arrDate": "12.09.2026", "arrTime": "6:15", "to": "Москва", "stops": "1 (Стамбул)", "stopHours": "2:40", "airline": "Turkish Airlines", "link": "https://avs.io/AmwW", "price": 83578 }
+      ]
+    },
+    {
+      "id": "back-C",
+      "title": "Вариант C — из Севильи (через Измир)",
+      "badge": "пересадка в Стамбуле",
+      "origin": "Севилья",
+      "airlines": "Pegasus Airlines",
+      "price": 81559,
+      "segments": [
+        { "depDate": "10.09.2026", "depTime": "15:45", "from": "Севилья", "arrDate": "11.09.2026", "arrTime": "1:15", "to": "Измир", "stops": "1 (Стамбул)", "stopHours": "3:05", "airline": "Pegasus Airlines", "link": "https://avs.io/BsdZ", "price": 29385 },
+        { "depDate": "11.09.2026", "depTime": "20:35", "from": "Измир", "arrDate": "12.09.2026", "arrTime": "0:55", "to": "Москва", "stops": "Прямой", "stopHours": "19:20", "airline": "Pegasus Airlines", "link": "https://avs.io/BseG", "price": 52174 }
+      ]
+    },
+    {
+      "id": "back-D",
+      "title": "Вариант D — из Барселоны (ночь в Измире, SunExpress)",
+      "badge": "пересадка в Измире",
+      "origin": "Барселона",
+      "airlines": "SunExpress + Pegasus Airlines",
+      "price": 89777,
+      "segments": [
+        { "depDate": "10.09.2026", "depTime": "22:35", "from": "Барселона", "arrDate": "11.09.2026", "arrTime": "2:45", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "SunExpress", "link": "https://avs.io/BWlX", "price": 89777 },
+        { "depDate": "11.09.2026", "depTime": "20:35", "from": "Измир", "arrDate": "12.09.2026", "arrTime": "0:55", "to": "Москва", "stops": "Прямой", "stopHours": "17:50", "airline": "Pegasus Airlines", "link": "https://avs.io/BWlX", "price": 0 }
+      ]
+    },
+    {
+      "id": "back-E",
+      "title": "Вариант E — из Барселоны (стыковка в Измире 1:35)",
+      "badge": "пересадка в Измире",
+      "origin": "Барселона",
+      "airlines": "Pegasus Airlines",
+      "price": 56298,
+      "segments": [
+        { "depDate": "11.09.2026", "depTime": "14:45", "from": "Барселона", "arrDate": "11.09.2026", "arrTime": "19:00", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "Pegasus Airlines", "link": "https://avs.io/BWmv", "price": 56298 },
+        { "depDate": "11.09.2026", "depTime": "20:35", "from": "Измир", "arrDate": "12.09.2026", "arrTime": "0:55", "to": "Москва", "stops": "Прямой", "stopHours": "1:35", "airline": "Pegasus Airlines", "link": "https://avs.io/BWmv", "price": 0 }
+      ]
+    },
+    {
+      "id": "back-F",
+      "title": "Вариант F — из Барселоны (ночная пересадка в Измире)",
+      "badge": "ночная пересадка в Измире",
+      "origin": "Барселона",
+      "airlines": "Pegasus Airlines",
+      "price": 109242,
+      "segments": [
+        { "depDate": "11.09.2026", "depTime": "14:45", "from": "Барселона", "arrDate": "11.09.2026", "arrTime": "19:00", "to": "Измир", "stops": "Прямой", "stopHours": "", "airline": "Pegasus Airlines", "link": "https://avs.io/BWmU", "price": 109242 },
+        { "depDate": "12.09.2026", "depTime": "20:35", "from": "Измир", "arrDate": "13.09.2026", "arrTime": "0:55", "to": "Москва", "stops": "Прямой", "stopHours": "25:35", "airline": "Pegasus Airlines", "link": "https://avs.io/BWmU", "price": 0 }
+      ]
+    }
+  ]
+}

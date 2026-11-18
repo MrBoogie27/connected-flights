@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Билеты</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <h1 id="title"></h1>
+  <p class="sub" id="subtitle"></p>
+  <p class="note" id="note"></p>
+
+  <h2>1. Москва → <span id="dest1"></span></h2>
+  <div class="options" id="section-out"></div>
+
+  <h2>2. <span id="origin2"></span> → Москва</h2>
+  <div class="options" id="section-back"></div>
+</div>
+
+<div class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="total-label">Общая стоимость на <span id="passengers"></span></div>
+      <div class="total-value" id="total">—</div>
+      <div class="diff" id="diff"></div>
+    </div>
+    <div class="route-summary" id="summary"></div>
+  </div>
+</div>
+
+<script>
+fetch('../data/es26.json')
+  .then(r => r.json())
+  .then(data => {
+    const meta = data.meta;
+    const outbound = data.outbound;
+    const back = data.back;
+
+    // Установить title и основные данные
+    document.title = meta.title + ' · ' + meta.dates;
+    document.getElementById('title').textContent = meta.title;
+    document.getElementById('subtitle').textContent = meta.dates + ' · ' + meta.passengers + ' пассажира · цены указаны за ' + meta.passengers;
+    document.getElementById('note').textContent = meta.note;
+    document.getElementById('note').style.display = meta.note ? 'block' : 'none';
+    document.getElementById('passengers').textContent = meta.passengers;
+
+    // Вспомогательные функции
+    const fmt = n => n.toLocaleString("ru-RU") + " ₽";
+    const cell = v => v === "" || v == null ? '<span class="empty">—</span>' : v;
+    const linkCell = l => l ? `<a href="${l}" target="_blank" rel="noopener">${l.replace("https://","")}</a>` : '<span class="empty">—</span>';
+
+    function segTable(segments, showSubtotal) {
+      let rows = segments.map(s => `
+        <tr>
+          <td data-label="Вылет">${s.depDate}<br>${s.depTime}</td>
+          <td data-label="Откуда">${s.from}</td>
+          <td data-label="Прилёт">${s.arrDate}<br>${s.arrTime}</td>
+          <td data-label="Куда">${s.to}</td>
+          <td data-label="Пересадки">${cell(s.stops)}</td>
+          <td data-label="Стыковка, ч">${cell(s.stopHours)}</td>
+          <td data-label="Авиакомпания">${s.airline}</td>
+          <td data-label="Ссылка">${linkCell(s.link)}</td>
+          <td class="num" data-label="Цена на 2">${fmt(s.price)}</td>
+        </tr>`).join("");
+      return `<table>
+        <colgroup>
+          <col style="width:9%"><col style="width:15%"><col style="width:9%"><col style="width:15%">
+          <col style="width:10%"><col style="width:8%"><col style="width:13%"><col style="width:12%"><col style="width:9%">
+        </colgroup>
+        <thead><tr>
+          <th>Вылет</th><th>Откуда</th><th>Прилёт</th><th>Куда</th>
+          <th>Пересадки</th><th>Стыковка, ч</th><th>Авиакомпания</th><th>Ссылка</th><th class="num">Цена на 2</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    }
+
+    function renderSection(list, containerId, group, defaultId) {
+      const c = document.getElementById(containerId);
+      c.innerHTML = list.map(o => `
+        <label class="opt${o.id === defaultId ? " selected" : ""}" data-id="${o.id}">
+          <div class="opt-head">
+            <span class="opt-title">
+              <input type="radio" name="${group}" value="${o.id}" ${o.id === defaultId ? "checked" : ""}>
+              ${o.title}
+              ${o.badge ? `<span class="badge">${o.badge}</span>` : ""}
+            </span>
+            <span class="price-wrap">
+              <span class="price-tag">${fmt(o.price)}</span>
+              <span class="delta" data-price="${o.price}"></span>
+            </span>
+          </div>
+          ${segTable(o.segments)}
+        </label>`).join("");
+    }
+
+    const minOut = Math.min(...outbound.map(o => o.price));
+    const minBack = Math.min(...back.map(o => o.price));
+    const minTotal = minOut + minBack;
+
+    function selected(list, group) {
+      const id = document.querySelector(`input[name="${group}"]:checked`).value;
+      return list.find(o => o.id === id);
+    }
+
+    function fmtDelta(d) {
+      if (d === 0) return "±0 ₽";
+      const sign = d > 0 ? "+" : "−";
+      return sign + Math.abs(d).toLocaleString("ru-RU") + " ₽";
+    }
+
+    function updateDeltas(containerId, selectedPrice) {
+      document.querySelectorAll(`#${containerId} .delta`).forEach(el => {
+        el.textContent = fmtDelta(Number(el.dataset.price) - selectedPrice);
+      });
+    }
+
+    function update() {
+      document.querySelectorAll(".opt").forEach(el => {
+        el.classList.toggle("selected", el.querySelector("input").checked);
+      });
+      const o = selected(outbound, "out");
+      const b = selected(back, "back");
+      const total = o.price + b.price;
+      document.getElementById("total").textContent = fmt(total);
+
+      updateDeltas("section-out", o.price);
+      updateDeltas("section-back", b.price);
+
+      const diff = total - minTotal;
+      document.getElementById("diff").textContent = diff === 0
+        ? "минимальная стоимость маршрута"
+        : `дороже минимума (${fmt(minTotal)}) на ${fmt(diff)}`;
+
+      document.getElementById("summary").innerHTML =
+        `Москва → <b>${o.dest}</b> (${o.airlines}), затем <b>${b.origin}</b> → Москва (${b.airlines})`;
+    }
+
+    // Инициализация
+    renderSection(outbound, "section-out", "out", "out-A");
+    renderSection(back, "section-back", "back", "back-A");
+    
+    // Установить имена городов в заголовках
+    document.getElementById('dest1').textContent = outbound[0].dest;
+    document.getElementById('origin2').textContent = back[0].origin;
+    
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener("change", update));
+    update();
+  });
+</script>
+</body>
+</html>

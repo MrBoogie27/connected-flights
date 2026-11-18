@@ -2,15 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Билеты Москва ⇄ Испания · 28.08–11.09.2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мои путешествия</title>
 <style>
   :root {
     --bg: #f5f6f8;
     --card: #ffffff;
     --border: #e2e5ea;
     --accent: #2563eb;
-    --accent-soft: #eef4ff;
     --text: #1f2430;
     --muted: #8a91a0;
   }
@@ -21,496 +20,110 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.45;
-    padding: 24px 16px 140px;
+    padding: 40px 20px;
   }
   .wrap { max-width: 1080px; margin: 0 auto; }
-  h1 { font-size: 22px; margin: 0 0 4px; }
-  .sub { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
-  h2 {
-    font-size: 17px;
-    margin: 28px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--border);
-  }
-  .options { display: flex; flex-direction: column; gap: 12px; }
-  .opt {
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .description { color: var(--muted); font-size: 15px; margin: 0 0 40px; }
+  .routes { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .route-card {
     display: block;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
     cursor: pointer;
-    transition: border-color .15s, box-shadow .15s, background .15s;
   }
-  .opt:hover { border-color: #c3ccdb; }
-  .opt.selected {
+  .route-card:hover {
     border-color: var(--accent);
-    background: var(--accent-soft);
-    box-shadow: 0 0 0 1px var(--accent);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
   }
-  .opt-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .opt-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
-  .opt input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; }
-  .badge {
-    font-size: 12px;
-    font-weight: 500;
-    color: #b45309;
-    background: #fff4e5;
-    border-radius: 6px;
-    padding: 2px 8px;
-    white-space: nowrap;
-  }
-  .price-tag { font-weight: 700; font-size: 16px; white-space: nowrap; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
-  th, td {
-    text-align: left;
-    padding: 7px 9px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-  th { color: var(--muted); font-weight: 500; font-size: 12px; }
-  tbody tr:last-child td { border-bottom: none; }
-  td.num, th.num { text-align: right; white-space: nowrap; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .seg-price td { color: var(--muted); font-size: 12px; }
-  .footer {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -4px 16px rgba(0,0,0,.06);
-    padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
-  }
-  .footer-inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .total-label { font-size: 14px; color: var(--muted); }
-  .total-value { font-size: 26px; font-weight: 800; }
-  .diff { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .route-summary { font-size: 13px; color: var(--muted); flex: 1 1 260px; }
-  .route-summary b { color: var(--text); }
-  .empty { color: var(--muted); }
-
-  .note { font-size: 13px; color: var(--muted); margin: -14px 0 20px; }
-  .price-wrap { display: flex; flex-direction: column; align-items: flex-end; white-space: nowrap; }
-  .delta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .route-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .flag { font-size: 32px; }
+  .year { color: var(--muted); font-size: 14px; font-weight: 500; background: var(--bg); padding: 4px 8px; border-radius: 4px; }
+  .route-card h3 { margin: 0 0 8px; font-size: 20px; color: var(--text); }
+  .dates { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .price { font-size: 18px; font-weight: 600; color: var(--accent); margin: 12px 0; }
+  .status { color: var(--muted); font-size: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .loading { text-align: center; color: var(--muted); padding: 40px 20px; }
+  .error { color: #dc2626; padding: 16px; background: #fee2e2; border-radius: 8px; margin: 20px 0; }
 
   @media (max-width: 640px) {
-    body { padding: 16px 12px 180px; }
-    h1 { font-size: 20px; }
-    h2 { font-size: 16px; }
-
-    .opt { padding: 16px; border-radius: 14px; }
-    .opt-head { flex-wrap: wrap; margin-bottom: 12px; }
-    .opt-title { font-size: 15px; }
-    .opt input { width: 22px; height: 22px; }
-    .price-tag { font-size: 17px; }
-
-    /* Таблицы -> карточки сегментов */
-    table { table-layout: auto; }
-    table colgroup, table thead { display: none; }
-    table, tbody, tr, td { display: block; width: auto; }
-    tbody tr {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 6px 10px;
-      margin-bottom: 10px;
-    }
-    tbody tr:last-child { margin-bottom: 0; }
-    tbody tr:last-child td { border-bottom: 1px solid var(--border); }
-    td {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      padding: 6px 0;
-      text-align: right;
-      font-size: 14px;
-      border-bottom: 1px solid var(--border);
-      white-space: normal;
-    }
-    td:last-child { border-bottom: none; }
-    td.num { text-align: right; }
-    td::before {
-      content: attr(data-label);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 500;
-      text-align: left;
-      flex: 0 0 auto;
-      white-space: nowrap;
-    }
-    td .empty { color: var(--muted); }
-
-    .footer-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .total-value { font-size: 24px; }
-    .route-summary { flex: 1 1 auto; }
+    body { padding: 24px 16px; }
+    h1 { font-size: 24px; }
+    .routes { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Билеты Москва ⇄ Испания</h1>
-  <p class="sub">28.08.2026 – 11.09.2026 · 2 пассажира · цены указаны за двоих</p>
-  <p class="note">Для сравнения: пересадка в Анкаре была с 9:10 до 17:40 — это 8:30.</p>
-
-  <h2>1. Москва → Испания</h2>
-  <div class="options" id="section-out"></div>
-
-  <h2>2. Испания → Москва</h2>
-  <div class="options" id="section-back"></div>
-</div>
-
-<div class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="total-label">Общая стоимость на 2</div>
-      <div class="total-value" id="total">—</div>
-      <div class="diff" id="diff"></div>
-    </div>
-    <div class="route-summary" id="summary"></div>
+  <h1>Мои путешествия</h1>
+  <p class="description">Сравнение вариантов билетов по маршрутам</p>
+  <div class="routes" id="routes">
+    <div class="loading">Загрузка маршрутов...</div>
   </div>
 </div>
 
 <script>
-const outbound = [
-  {
-    id: "out-A",
-    title: "Вариант A — через Измир (Turkish)",
-    badge: "пересадка в Стамбуле",
-    dest: "Барселона",
-    airlines: "Turkish Airlines + SunExpress",
-    price: 111729,
-    segments: [
-      { depDate: "28.08.2026", depTime: "2:25", from: "Москва", arrDate: "28.08.2026", arrTime: "11:10", to: "Измир", stops: "1 (Стамбул)", stopHours: "3:45", airline: "Turkish Airlines", link: "https://avs.io/AlXy", price: 55316 },
-      { depDate: "28.08.2026", depTime: "18:55", from: "Измир", arrDate: "28.08.2026", arrTime: "21:35", to: "Барселона", stops: "Прямой", stopHours: "7:45", airline: "SunExpress", link: "https://avs.io/AmXp", price: 49262 },
-      { depDate: "29.08.2026", depTime: "20:00", from: "Барселона", arrDate: "29.08.2026", arrTime: "23:44", to: "Мадрид", stops: "Прямой", stopHours: "22:25", airline: "Поезд", link: "https://www.renfe.com/es/es", price: 7151 }
-    ]
-  },
-  {
-    id: "out-B",
-    title: "Вариант B — через Измир (Pegasus до Измира)",
-    badge: null,
-    dest: "Барселона",
-    airlines: "Pegasus + SunExpress",
-    price: 119970,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "5:55", to: "Измир", stops: "Прямой", stopHours: "", airline: "Pegasus", link: "https://short-url.cc/1sPL2", price: 63557 },
-      { depDate: "28.08.2026", depTime: "18:55", from: "Измир", arrDate: "28.08.2026", arrTime: "21:35", to: "Барселона", stops: "Прямой", stopHours: "13:00", airline: "SunExpress", link: "https://avs.io/AmXp", price: 49262 },
-      { depDate: "29.08.2026", depTime: "20:00", from: "Барселона", arrDate: "29.08.2026", arrTime: "23:44", to: "Мадрид", stops: "Прямой", stopHours: "22:25", airline: "Поезд", link: "https://www.renfe.com/es/es", price: 7151 }
-    ]
-  },
-  {
-    id: "out-C",
-    title: "Вариант C — через Измир (Ajet, пересадка в Анкаре)",
-    badge: "пересадка в Анкаре",
-    dest: "Барселона",
-    airlines: "Ajet + SunExpress",
-    price: 99208,
-    segments: [
-      { depDate: "28.08.2026", depTime: "5:05", from: "Москва", arrDate: "28.08.2026", arrTime: "11:50", to: "Измир", stops: "1 (Анкара)", stopHours: "1:10", airline: "Ajet", link: "https://avs.io/An04", price: 42795 },
-      { depDate: "28.08.2026", depTime: "18:55", from: "Измир", arrDate: "28.08.2026", arrTime: "21:35", to: "Барселона", stops: "Прямой", stopHours: "7:05", airline: "SunExpress", link: "https://avs.io/AmXp", price: 49262 },
-      { depDate: "29.08.2026", depTime: "20:00", from: "Барселона", arrDate: "29.08.2026", arrTime: "23:44", to: "Мадрид", stops: "Прямой", stopHours: "22:25", airline: "Поезд", link: "https://www.renfe.com/es/es", price: 7151 }
-    ]
-  },
-  {
-    id: "out-D",
-    title: "Вариант D — через Измир (Ajet, Стамбул)",
-    badge: "пересадка в Стамбуле",
-    dest: "Барселона",
-    airlines: "Ajet + Turkish Airlines + SunExpress",
-    price: 99529,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "9:25", to: "Измир", stops: "1 (Стамбул)", stopHours: "2:15", airline: "Ajet + Turkish Airlines", link: "https://avs.io/BmiH", price: 43116 },
-      { depDate: "28.08.2026", depTime: "18:55", from: "Измир", arrDate: "28.08.2026", arrTime: "21:35", to: "Барселона", stops: "Прямой", stopHours: "9:30", airline: "SunExpress", link: "https://avs.io/AmXp", price: 49262 },
-      { depDate: "29.08.2026", depTime: "20:00", from: "Барселона", arrDate: "29.08.2026", arrTime: "23:44", to: "Мадрид", stops: "Прямой", stopHours: "22:25", airline: "Поезд", link: "https://www.renfe.com/es/es", price: 7151 }
-    ]
-  },
-  {
-    id: "out-E",
-    title: "Вариант E — через Измир (Ajet)",
-    badge: "пересадка в Стамбуле",
-    dest: "Мадрид",
-    airlines: "Ajet + Turkish Airlines + SunExpress",
-    price: 91972,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "9:25", to: "Измир", stops: "1 (Стамбул)", stopHours: "2:15", airline: "Ajet + Turkish Airlines", link: "https://avs.io/BmiH", price: 43116 },
-      { depDate: "28.08.2026", depTime: "15:20", from: "Измир", arrDate: "28.08.2026", arrTime: "18:45", to: "Мадрид", stops: "Прямой", stopHours: "5:55", airline: "SunExpress", link: "https://avs.io/Bmld", price: 48856 }
-    ]
-  },
-  {
-    id: "out-F",
-    title: "Вариант F — через Измир (Turkish)",
-    badge: "пересадка в Стамбуле",
-    dest: "Мадрид",
-    airlines: "Turkish Airlines + SunExpress",
-    price: 104172,
-    segments: [
-      { depDate: "28.08.2026", depTime: "2:25", from: "Москва", arrDate: "28.08.2026", arrTime: "11:10", to: "Измир", stops: "1 (Стамбул)", stopHours: "3:45", airline: "Turkish Airlines", link: "https://avs.io/AlXy", price: 55316 },
-      { depDate: "28.08.2026", depTime: "15:20", from: "Измир", arrDate: "28.08.2026", arrTime: "18:45", to: "Мадрид", stops: "Прямой", stopHours: "4:10", airline: "SunExpress", link: "https://avs.io/Bmld", price: 48856 }
-    ]
-  },
-  {
-    id: "out-G",
-    title: "Вариант G — через Измир (Pegasus)",
-    badge: null,
-    dest: "Мадрид",
-    airlines: "Pegasus + SunExpress",
-    price: 112413,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "5:55", to: "Измир", stops: "Прямой", stopHours: "", airline: "Pegasus", link: "https://short-url.cc/1sPL2", price: 63557 },
-      { depDate: "28.08.2026", depTime: "15:20", from: "Измир", arrDate: "28.08.2026", arrTime: "18:45", to: "Мадрид", stops: "Прямой", stopHours: "9:25", airline: "SunExpress", link: "https://avs.io/Bmld", price: 48856 }
-    ]
-  },
-  {
-    id: "out-H",
-    title: "Вариант H — напрямую в Мадрид (Pegasus)",
-    badge: "пересадка в Стамбуле",
-    dest: "Мадрид",
-    airlines: "Pegasus",
-    price: 91010,
-    segments: [
-      { depDate: "28.08.2026", depTime: "4:00", from: "Москва", arrDate: "28.08.2026", arrTime: "13:30", to: "Мадрид", stops: "1 (Стамбул)", stopHours: "1:50", airline: "Pegasus", link: "https://avs.io/AmO1", price: 91010 }
-    ]
-  },
-  {
-    id: "out-I",
-    title: "Вариант I — 2 ночи в Измире (Turkish, как в A)",
-    badge: "пересадка в Стамбуле",
-    dest: "Мадрид",
-    airlines: "Turkish Airlines + Pegasus",
-    price: 97108,
-    segments: [
-      { depDate: "28.08.2026", depTime: "2:25", from: "Москва", arrDate: "28.08.2026", arrTime: "11:10", to: "Измир", stops: "1 (Стамбул)", stopHours: "3:45", airline: "Turkish Airlines", link: "https://avs.io/AlXy", price: 55316 },
-      { depDate: "30.08.2026", depTime: "09:20", from: "Измир", arrDate: "30.08.2026", arrTime: "12:45", to: "Мадрид", stops: "Прямой", stopHours: "46:10", airline: "Pegasus Airlines", link: "https://avs.io/BPUY", price: 41792 }
-    ]
-  },
-  {
-    id: "out-J",
-    title: "Вариант J — 2 ночи в Измире (Pegasus, как в B)",
-    badge: null,
-    dest: "Мадрид",
-    airlines: "Pegasus",
-    price: 105349,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "5:55", to: "Измир", stops: "Прямой", stopHours: "", airline: "Pegasus", link: "https://short-url.cc/1sPL2", price: 63557 },
-      { depDate: "30.08.2026", depTime: "09:20", from: "Измир", arrDate: "30.08.2026", arrTime: "12:45", to: "Мадрид", stops: "Прямой", stopHours: "51:25", airline: "Pegasus Airlines", link: "https://avs.io/BPUY", price: 41792 }
-    ]
-  },
-  {
-    id: "out-K",
-    title: "Вариант K — 2 ночи в Измире (Ajet через Анкару, как в C)",
-    badge: "пересадка в Анкаре",
-    dest: "Мадрид",
-    airlines: "Ajet + Pegasus",
-    price: 84587,
-    segments: [
-      { depDate: "28.08.2026", depTime: "5:05", from: "Москва", arrDate: "28.08.2026", arrTime: "11:50", to: "Измир", stops: "1 (Анкара)", stopHours: "1:10", airline: "Ajet", link: "https://avs.io/An04", price: 42795 },
-      { depDate: "30.08.2026", depTime: "09:20", from: "Измир", arrDate: "30.08.2026", arrTime: "12:45", to: "Мадрид", stops: "Прямой", stopHours: "45:30", airline: "Pegasus Airlines", link: "https://avs.io/BPUY", price: 41792 }
-    ]
-  },
-  {
-    id: "out-L",
-    title: "Вариант L — 2 ночи в Измире (Ajet + Turkish, как в D)",
-    badge: "пересадка в Стамбуле",
-    dest: "Мадрид",
-    airlines: "Ajet + Turkish Airlines + Pegasus",
-    price: 84908,
-    segments: [
-      { depDate: "28.08.2026", depTime: "1:45", from: "Москва", arrDate: "28.08.2026", arrTime: "9:25", to: "Измир", stops: "1 (Стамбул)", stopHours: "2:15", airline: "Ajet + Turkish Airlines", link: "https://avs.io/BmiH", price: 43116 },
-      { depDate: "30.08.2026", depTime: "09:20", from: "Измир", arrDate: "30.08.2026", arrTime: "12:45", to: "Мадрид", stops: "Прямой", stopHours: "47:55", airline: "Pegasus Airlines", link: "https://avs.io/BPUY", price: 41792 }
-    ]
-  }
-];
+  // Список маршрутов
+  const routes = [
+    { id: 'es26', name: 'Испания', flag: '🇪🇸' }
+  ];
 
-const back = [
-  {
-    id: "back-A",
-    title: "Вариант A — из Севильи",
-    badge: "пересадка в Стамбуле",
-    origin: "Севилья",
-    airlines: "Pegasus",
-    price: 52818,
-    segments: [
-      { depDate: "11.09.2026", depTime: "15:45", from: "Севилья", arrDate: "12.09.2026", arrTime: "2:55", to: "Москва", stops: "1 (Стамбул)", stopHours: "1:45", airline: "Pegasus", link: "https://avs.io/AmAT", price: 52818 }
-    ]
-  },
-  {
-    id: "back-B",
-    title: "Вариант B — из Мадрида",
-    badge: "пересадка в Стамбуле",
-    origin: "Мадрид",
-    airlines: "Turkish Airlines",
-    price: 83578,
-    segments: [
-      { depDate: "11.09.2026", depTime: "18:25", from: "Мадрид", arrDate: "12.09.2026", arrTime: "6:15", to: "Москва", stops: "1 (Стамбул)", stopHours: "2:40", airline: "Turkish Airlines", link: "https://avs.io/AmwW", price: 83578 }
-    ]
-  },
-  {
-    id: "back-C",
-    title: "Вариант C — из Севильи (через Измир)",
-    badge: "пересадка в Стамбуле",
-    origin: "Севилья",
-    airlines: "Pegasus Airlines",
-    price: 81559,
-    segments: [
-      { depDate: "10.09.2026", depTime: "15:45", from: "Севилья", arrDate: "11.09.2026", arrTime: "1:15", to: "Измир", stops: "1 (Стамбул)", stopHours: "3:05", airline: "Pegasus Airlines", link: "https://avs.io/BsdZ", price: 29385 },
-      { depDate: "11.09.2026", depTime: "20:35", from: "Измир", arrDate: "12.09.2026", arrTime: "0:55", to: "Москва", stops: "Прямой", stopHours: "19:20", airline: "Pegasus Airlines", link: "https://avs.io/BseG", price: 52174 }
-    ]
-  },
-  {
-    id: "back-D",
-    title: "Вариант D — из Барселоны (ночь в Измире, SunExpress)",
-    badge: "пересадка в Измире",
-    origin: "Барселона",
-    airlines: "SunExpress + Pegasus Airlines",
-    price: 89777,
-    segments: [
-      { depDate: "10.09.2026", depTime: "22:35", from: "Барселона", arrDate: "11.09.2026", arrTime: "2:45", to: "Измир", stops: "Прямой", stopHours: "", airline: "SunExpress", link: "https://avs.io/BWlX", price: 89777 },
-      { depDate: "11.09.2026", depTime: "20:35", from: "Измир", arrDate: "12.09.2026", arrTime: "0:55", to: "Москва", stops: "Прямой", stopHours: "17:50", airline: "Pegasus Airlines", link: "https://avs.io/BWlX", price: 0 }
-    ]
-  },
-  {
-    id: "back-E",
-    title: "Вариант E — из Барселоны (стыковка в Измире 1:35)",
-    badge: "пересадка в Измире",
-    origin: "Барселона",
-    airlines: "Pegasus Airlines",
-    price: 56298,
-    segments: [
-      { depDate: "11.09.2026", depTime: "14:45", from: "Барселона", arrDate: "11.09.2026", arrTime: "19:00", to: "Измир", stops: "Прямой", stopHours: "", airline: "Pegasus Airlines", link: "https://avs.io/BWmv", price: 56298 },
-      { depDate: "11.09.2026", depTime: "20:35", from: "Измир", arrDate: "12.09.2026", arrTime: "0:55", to: "Москва", stops: "Прямой", stopHours: "1:35", airline: "Pegasus Airlines", link: "https://avs.io/BWmv", price: 0 }
-    ]
-  },
-  {
-    id: "back-F",
-    title: "Вариант F — из Барселоны (ночная пересадка в Измире)",
-    badge: "ночная пересадка в Измире",
-    origin: "Барселона",
-    airlines: "Pegasus Airlines",
-    price: 109242,
-    segments: [
-      { depDate: "11.09.2026", depTime: "14:45", from: "Барселона", arrDate: "11.09.2026", arrTime: "19:00", to: "Измир", stops: "Прямой", stopHours: "", airline: "Pegasus Airlines", link: "https://avs.io/BWmU", price: 109242 },
-      { depDate: "12.09.2026", depTime: "20:35", from: "Измир", arrDate: "13.09.2026", arrTime: "0:55", to: "Москва", stops: "Прямой", stopHours: "25:35", airline: "Pegasus Airlines", link: "https://avs.io/BWmU", price: 0 }
-    ]
-  }
-];
+  Promise.all(routes.map(route => 
+    fetch(`data/${route.id}.json`)
+      .then(r => r.json())
+      .then(data => ({
+        ...route,
+        meta: data.meta,
+        outbound: data.outbound,
+        back: data.back
+      }))
+      .catch(err => {
+        console.error(`Ошибка загрузки ${route.id}:`, err);
+        return { ...route, error: true };
+      })
+  )).then(loadedRoutes => {
+    const container = document.getElementById('routes');
+    container.innerHTML = '';
 
-const fmt = n => n.toLocaleString("ru-RU") + " ₽";
-const cell = v => v === "" || v == null ? '<span class="empty">—</span>' : v;
-const linkCell = l => l ? `<a href="${l}" target="_blank" rel="noopener">${l.replace("https://","")}</a>` : '<span class="empty">—</span>';
+    if (loadedRoutes.length === 0) {
+      container.innerHTML = '<div class="error">Нет доступных маршрутов</div>';
+      return;
+    }
 
-function segTable(segments, showSubtotal) {
-  let rows = segments.map(s => `
-    <tr>
-      <td data-label="Вылет">${s.depDate}<br>${s.depTime}</td>
-      <td data-label="Откуда">${s.from}</td>
-      <td data-label="Прилёт">${s.arrDate}<br>${s.arrTime}</td>
-      <td data-label="Куда">${s.to}</td>
-      <td data-label="Пересадки">${cell(s.stops)}</td>
-      <td data-label="Стыковка, ч">${cell(s.stopHours)}</td>
-      <td data-label="Авиакомпания">${s.airline}</td>
-      <td data-label="Ссылка">${linkCell(s.link)}</td>
-      <td class="num" data-label="Цена на 2">${fmt(s.price)}</td>
-    </tr>`).join("");
-  return `<table>
-    <colgroup>
-      <col style="width:9%"><col style="width:15%"><col style="width:9%"><col style="width:15%">
-      <col style="width:10%"><col style="width:8%"><col style="width:13%"><col style="width:12%"><col style="width:9%">
-    </colgroup>
-    <thead><tr>
-      <th>Вылет</th><th>Откуда</th><th>Прилёт</th><th>Куда</th>
-      <th>Пересадки</th><th>Стыковка, ч</th><th>Авиакомпания</th><th>Ссылка</th><th class="num">Цена на 2</th>
-    </tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
-}
+    loadedRoutes.forEach(route => {
+      if (route.error) {
+        container.innerHTML += `<div class="error">Ошибка загрузки маршрута ${route.name}</div>`;
+        return;
+      }
 
-function renderSection(list, containerId, group, defaultId) {
-  const c = document.getElementById(containerId);
-  c.innerHTML = list.map(o => `
-    <label class="opt${o.id === defaultId ? " selected" : ""}" data-id="${o.id}">
-      <div class="opt-head">
-        <span class="opt-title">
-          <input type="radio" name="${group}" value="${o.id}" ${o.id === defaultId ? "checked" : ""}>
-          ${o.title}
-          ${o.badge ? `<span class="badge">${o.badge}</span>` : ""}
-        </span>
-        <span class="price-wrap">
-          <span class="price-tag">${fmt(o.price)}</span>
-          <span class="delta" data-price="${o.price}"></span>
-        </span>
-      </div>
-      ${segTable(o.segments)}
-    </label>`).join("");
-}
-
-const minOut = Math.min(...outbound.map(o => o.price));
-const minBack = Math.min(...back.map(o => o.price));
-const minTotal = minOut + minBack;
-
-function selected(list, group) {
-  const id = document.querySelector(`input[name="${group}"]:checked`).value;
-  return list.find(o => o.id === id);
-}
-
-function fmtDelta(d) {
-  if (d === 0) return "±0 ₽";
-  const sign = d > 0 ? "+" : "−";
-  return sign + Math.abs(d).toLocaleString("ru-RU") + " ₽";
-}
-
-function updateDeltas(containerId, selectedPrice) {
-  document.querySelectorAll(`#${containerId} .delta`).forEach(el => {
-    el.textContent = fmtDelta(Number(el.dataset.price) - selectedPrice);
+      const minOut = Math.min(...route.outbound.map(o => o.price));
+      const minBack = Math.min(...route.back.map(o => o.price));
+      const minPrice = minOut + minBack;
+      const fmt = n => n.toLocaleString("ru-RU") + " ₽";
+      const year = route.meta.dates.split('–')[0].trim().split('.')[2];
+      
+      const card = document.createElement('a');
+      card.href = `${route.id}/`;
+      card.className = 'route-card';
+      card.innerHTML = `
+        <div class="route-header">
+          <span class="flag">${route.flag}</span>
+          <span class="year">${year}</span>
+        </div>
+        <h3>${route.name}</h3>
+        <p class="dates">${route.meta.dates}</p>
+        <div class="price">От ${fmt(minPrice)}</div>
+        <p class="status">Завершено</p>
+      `;
+      container.appendChild(card);
+    });
   });
-}
-
-function update() {
-  document.querySelectorAll(".opt").forEach(el => {
-    el.classList.toggle("selected", el.querySelector("input").checked);
-  });
-  const o = selected(outbound, "out");
-  const b = selected(back, "back");
-  const total = o.price + b.price;
-  document.getElementById("total").textContent = fmt(total);
-
-  updateDeltas("section-out", o.price);
-  updateDeltas("section-back", b.price);
-
-  const diff = total - minTotal;
-  document.getElementById("diff").textContent = diff === 0
-    ? "минимальная стоимость маршрута"
-    : `дороже минимума (${fmt(minTotal)}) на ${fmt(diff)}`;
-
-  document.getElementById("summary").innerHTML =
-    `Москва → <b>${o.dest}</b> (${o.airlines}), затем <b>${b.origin}</b> → Москва (${b.airlines})`;
-}
-
-renderSection(outbound, "section-out", "out", "out-A");
-renderSection(back, "section-back", "back", "back-A");
-document.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener("change", update));
-update();
 </script>
 </body>
 </html>
