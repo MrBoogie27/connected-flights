@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Таиланд 2027</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  body { padding-bottom: 24px; }
+  .group-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .group-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+    font: inherit; color: inherit; text-align: left;
+  }
+  .group-header:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+  .group-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
+  .chev { display: inline-block; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg); transition: transform .15s; margin-top: -3px; }
+  .group-card.collapsed .chev { transform: rotate(-45deg); margin-top: 0; }
+  .group-size { color: var(--muted); font-size: 13px; font-weight: 400; }
+  .group-right { display: flex; align-items: baseline; gap: 14px; }
+  .group-sum { font-weight: 700; font-size: 15px; color: var(--accent); }
+  .group-sum.unk { color: #b45309; font-weight: 500; font-size: 13px; }
+  .group-body { margin-top: 14px; }
+  .group-card.collapsed .group-body { display: none; }
+  .group-card.collapsed { padding-bottom: 14px; }
+
+  .points {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
+  .field label { display: block; font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+  select {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+    font-size: 13px; background: var(--card); color: var(--text); cursor: pointer;
+  }
+  select:hover { border-color: #c3ccdb; }
+  select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+  select:disabled { background: var(--bg); color: var(--muted); cursor: not-allowed; }
+
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col-title { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+  .col .field { margin-bottom: 10px; }
+
+  .plaque {
+    padding: 10px 12px; background: var(--bg); border-radius: 6px;
+    border-left: 3px solid var(--accent); margin-bottom: 10px; font-size: 13px;
+  }
+  .plaque.leg { border-left-color: #94a3b8; }
+  .plaque.warn { border-left-color: #d97706; background: #fff9ef; }
+  .plaque.empty { border-left-color: #ef4444; color: #b91c1c; }
+  .plaque .when { font-weight: 600; }
+  .plaque .route { margin-top: 2px; }
+  .plaque .meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .plaque .ok { color: #059669; }
+  .plaque .bad { color: #b45309; }
+  .plaque .note { font-size: 12px; margin-top: 4px; color: #475569; }
+  .plaque .price-line { margin-top: 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .plaque .price { font-weight: 700; color: var(--accent); font-size: 15px; }
+  .plaque .price small { font-weight: 400; color: var(--muted); font-size: 11px; }
+  .plaque a { font-size: 12px; color: var(--accent); margin-left: 8px; }
+  .chip.ok { color: #047857; background: #e6f7ef; }
+  .chip {
+    display: inline-block; font-size: 11px; font-weight: 500; color: #b45309;
+    background: #fff4e5; border-radius: 6px; padding: 1px 7px; margin-top: 4px;
+  }
+
+  .breakdown {
+    margin-top: 4px; padding: 12px 14px; background: var(--accent-soft); border-radius: 8px; font-size: 13px;
+  }
+  .breakdown .row { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
+  .breakdown .row span:first-child { color: var(--muted); }
+  .breakdown .row:first-child span:last-child { font-weight: 600; }
+  .breakdown .row.total { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .breakdown .row.total span:first-child { color: var(--accent); }
+  .breakdown .issues { margin-top: 8px; color: #b45309; font-size: 12px; }
+
+  .summary-box {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: var(--card); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+  }
+  .summary-inner { max-width: 1080px; margin: 0 auto; }
+  .summary-groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 8px; }
+  .summary-group { font-size: 12px; }
+  .summary-group .n { color: var(--muted); }
+  .summary-group .p { font-weight: 600; font-size: 14px; }
+  .summary-group .p.unk { color: #b45309; font-weight: 500; font-size: 12px; }
+  .summary-total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 8px; border-top: 2px solid var(--border); }
+  .summary-label { color: var(--muted); font-size: 13px; }
+  .summary-label .inc { color: #b45309; }
+  .summary-price { font-size: 22px; font-weight: 800; color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .points { grid-template-columns: 1fr 1fr; }
+    .columns { grid-template-columns: 1fr; }
+    .summary-groups { grid-template-columns: 1fr 1fr; }
+    .summary-box { padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="title">Таиланд 2027</h1>
+  <p class="sub" id="subtitle"></p>
+  <div id="groups"></div>
+</div>
+
+<div class="summary-box" id="summary">
+  <div class="summary-inner">
+    <div class="summary-groups" id="summary-groups"></div>
+    <div class="summary-total">
+      <div class="summary-label" id="total-label">Итого</div>
+      <div class="summary-price" id="grand-total">—</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(async function () {
+  const data = await (await fetch('../data/th27.json')).json();
+  const { meta, outbound, back } = data;
+  const groups = meta.groups, cities = meta.allCities, feeders = meta.feeders;
+
+  const fmt = n => n.toLocaleString('ru-RU') + '\u00a0₽';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const shortDate = d => d.split('.').slice(0, 2).join('.');
+  const people = n => {
+    const m10 = n % 10, m100 = n % 100;
+    return n + (m10 === 1 && m100 !== 11 ? ' человек' : (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) ? ' человека' : ' человек');
+  };
+  const stopsText = n => n === 0 ? 'прямой' : n + (n === 1 ? ' пересадка' : n < 5 ? ' пересадки' : ' пересадок');
+
+  // ---------- данные ----------
+  const segOf = (v, hub) => v ? v.segments[hub] || null : null;
+  const availOut = hub => outbound.filter(v => v.segments[hub]);
+  const availBack = hub => back.filter(v => v.segments[hub]);
+  const titleOf = id => (outbound.find(v => v.id === id) || {}).title || id;
+
+  // единым билетом: рейс «туда» из пары bundleWith и тот же хаб туда и обратно
+  const isBundled = (backV, outV, st) =>
+    !!(backV && outV && st.outHub === st.backHub && (backV.bundleWith || []).includes(outV.id));
+  const backEff = (seg, bundled) => bundled && seg.bundle ? seg.bundle : seg;   // {price, links}
+  const outPrice = (v, hub) => v.segments[hub].price;
+  const backPriceFor = (v, hub, outV, st) => backEff(v.segments[hub], isBundled(v, outV, st)).price;
+  const cheapestBy = (list, f) => list.length ? list.reduce((a, b) => f(b) < f(a) ? b : a) : null;
+
+  // дорога между городами: free | priced | unknown
+  const pairKey = (a, b) => [a, b].sort().join('|');
+  function leg(a, b, st, slot) {
+    if (a === b) return { type: 'free', price: 0 };
+    const f = feeders.find(f => (f.a === a && f.b === b) || (f.a === b && f.b === a));
+    if (!f || !f.options || !f.options.length) return { type: 'unknown', a, b };
+    const key = slot + ':' + pairKey(a, b);
+    let o = f.options.find(x => x.id === (st.legOpt[key] || ''));
+    if (!o) o = cheapestBy(f.options, x => x.price);
+    return { type: 'priced', a, b, key, options: f.options, option: o, price: o.price,
+             ref: (o.legs || {})[a + '→' + b] || null };
+  }
+
+  // ---------- состояние ----------
+  const state = {};
+  groups.forEach(g => {
+    state[g.id] = {
+      start: g.startCity, outHub: g.startCity, backHub: g.startCity, end: g.startCity,
+      auto: { outHub: true, backHub: true, end: true },
+      outId: null, backId: null, legOpt: {}, collapsed: false,
+    };
+    ensure(g.id);
+  });
+
+  function ensure(gid) {
+    const st = state[gid];
+    const o = availOut(st.outHub), b = availBack(st.backHub);
+    const pref = (meta.defaultVariants || {});
+    if (!o.find(v => v.id === st.outId)) {
+      const pid = (pref[st.outHub] || {}).out;
+      st.outId = o.find(v => v.id === pid) ? pid : (cheapestBy(o, v => outPrice(v, st.outHub)) || {}).id || null;
+    }
+    if (!b.find(v => v.id === st.backId)) {
+      const pid = (pref[st.backHub] || {}).back;
+      if (b.find(v => v.id === pid)) {
+        st.backId = pid;
+      } else {
+        const outV = outbound.find(v => v.id === st.outId);
+        st.backId = (cheapestBy(b, v => backPriceFor(v, st.backHub, outV, st)) || {}).id || null;
+      }
+    }
+  }
+
+  // ---------- расчёт ----------
+  function calc(g) {
+    const st = state[g.id];
+    const outV = outbound.find(v => v.id === st.outId) || null;
+    const backV = back.find(v => v.id === st.backId) || null;
+    const outSeg = segOf(outV, st.outHub), backSeg = segOf(backV, st.backHub);
+    const leg1 = leg(st.start, st.outHub, st, 'leg1'), leg2 = leg(st.backHub, st.end, st, 'leg2');
+    const bundled = !!(backSeg && isBundled(backV, outV, st));
+    const backUse = backSeg ? backEff(backSeg, bundled) : null;
+    const issues = [];
+    if (!outSeg) issues.push('нет рейсов туда из города «' + st.outHub + '»');
+    if (!backSeg) issues.push('нет рейсов обратно в город «' + st.backHub + '»');
+    [leg1, leg2].forEach(l => { if (l.type === 'unknown') issues.push('нет данных о проезде ' + l.a + ' — ' + l.b); });
+    const perPerson = issues.length ? null : leg1.price + outSeg.price + backUse.price + leg2.price;
+    return { st, outV, backV, outSeg, backSeg, backUse, bundled, leg1, leg2, issues,
+             perPerson, total: perPerson == null ? null : perPerson * g.size };
+  }
+
+  // ---------- отрисовка ----------
+  function selectCity(gid, field, value, label, noFlightsFor) {
+    const opts = cities.map(c => {
+      const empty = noFlightsFor && !noFlightsFor(c);
+      return `<option value="${esc(c)}"${c === value ? ' selected' : ''}>${esc(c)}${empty ? ' — нет рейсов' : ''}</option>`;
+    }).join('');
+    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}">${opts}</select></div>`;
+  }
+
+  function selectVariant(gid, field, list, hub, selId, label) {
+    if (!list.length) {
+      return `<div class="field"><label>${label}</label><select disabled><option>Нет рейсов</option></select></div>`;
+    }
+    const opts = list.map(v =>
+      `<option value="${v.id}"${v.id === selId ? ' selected' : ''}>${esc(v.title)}</option>`).join('');
+    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}">${opts}</select></div>`;
+  }
+
+  function legPlaque(l, gid, field) {
+    if (l.type === 'free') return '';
+    if (l.type === 'unknown') {
+      return `<div class="plaque warn"><div class="route">${esc(l.a)} → ${esc(l.b)}</div>
+        <div class="note">Нет данных о проезде</div></div>`;
+    }
+    const o = l.option;
+    const picker = l.options.length > 1
+      ? `<div class="field" style="margin:6px 0"><select data-g="${gid}" data-f="${field}" data-key="${esc(l.key)}">${
+          l.options.map(x => `<option value="${x.id}"${x.id === o.id ? ' selected' : ''}>${esc(x.mode)} · ${esc(x.carrier)} — ${fmt(x.price)}</option>`).join('')
+        }</select></div>` : '';
+    const ref = l.ref ? `<div class="meta">Справочно: ${shortDate(l.ref.date)} ${l.ref.dep} → ${l.ref.arr}</div>` : '';
+    const est = o.estimate ? `<div class="chip">ориентировочно, по аналогии с рейсами в Пермь</div>` : '';
+    const link = o.link ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">Билет</a>` : '';
+    return `<div class="plaque leg"><div class="route">${esc(l.a)} → ${esc(l.b)} · ${esc(o.mode)}, ${esc(o.carrier)}</div>
+      ${picker}${ref}${est}
+      <div class="price-line"><span>${link}</span><span class="price">${fmt(l.price)} <small>на 1 чел.</small></span></div></div>`;
+  }
+
+  function flightPlaque(kind, seg, variant, hub, bundled) {
+    if (!seg) return `<div class="plaque empty">Нет рейсов ${kind === 'out' ? 'из' : 'в'} города «${esc(hub)}»</div>`;
+    const route = kind === 'out' ? `${esc(hub)} → ${esc(seg.dest)}` : `${esc(seg.orig)} → ${esc(hub)}`;
+    const use = kind === 'back' ? backEff(seg, bundled) : seg;
+    const links = (use.links || []).map((l, i) =>
+      `<a href="${esc(l)}" target="_blank" rel="noopener">Билет${use.links.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('');
+    let chip = '';
+    if (kind === 'back' && seg.bundle) {
+      const pairs = (variant.bundleWith || []).map(id => '«' + titleOf(id) + '»').join(', ');
+      chip = bundled
+        ? `<div class="chip ok">единым билетом с рейсом туда</div>`
+        : `<div class="chip">отдельным билетом · единым билетом ${fmt(seg.bundle.price)}, если туда ${esc(pairs)} и тот же хаб</div>`;
+    }
+    return `<div class="plaque">
+      <div class="when">${shortDate(seg.date)} ${seg.time} → ${shortDate(seg.arrDate)} ${seg.arrTime}</div>
+      <div class="route">${route}</div>
+      <div class="meta">${esc(seg.airline)} · ${stopsText(seg.stops)} ·
+        <span class="${seg.easy ? 'ok' : 'bad'}">${seg.easy ? 'лёгкая пересадка' : 'сложная пересадка'}</span></div>
+      ${seg.note ? `<div class="note">${esc(seg.note)}</div>` : ''}
+      ${seg.nights ? `<div class="note">Ночей в пути: ${seg.nights}</div>` : ''}
+      ${chip}
+      <div class="price-line"><span>${links}</span><span class="price">${fmt(use.price)} <small>на 1 чел.</small></span></div>
+    </div>`;
+  }
+
+  function breakdown(g, c) {
+    return `<div class="breakdown">
+      <div class="row"><span>На 1 человека</span><span>${c.perPerson == null ? 'уточняется' : fmt(c.perPerson)}</span></div>
+      <div class="row total"><span>Итого × ${g.size}</span><span>${c.total == null ? 'уточняется' : fmt(c.total)}</span></div>
+      ${c.issues.length ? `<div class="issues">${c.issues.map(i => '• ' + esc(i)).join('<br>')}</div>` : ''}
+    </div>`;
+  }
+
+  function cardHTML(g) {
+    const c = calc(g), st = c.st;
+    return `
+      <button type="button" class="group-header" data-toggle="${g.id}" aria-expanded="${!st.collapsed}">
+        <span class="group-title"><span class="chev"></span>${esc(g.name)}</span>
+        <span class="group-right">
+          <span class="group-size">${people(g.size)}</span>
+          <span class="group-sum${c.total == null ? ' unk' : ''}">${c.total == null ? 'цена уточняется' : fmt(c.total)}</span>
+        </span>
+      </button>
+      <div class="group-body">
+      <div class="points">
+        ${selectCity(g.id, 'start', st.start, 'Старт')}
+        ${selectCity(g.id, 'outHub', st.outHub, 'Хаб вылета в Таиланд', h => availOut(h).length > 0)}
+        ${selectCity(g.id, 'backHub', st.backHub, 'Хаб возвращения', h => availBack(h).length > 0)}
+        ${selectCity(g.id, 'end', st.end, 'Конец маршрута')}
+      </div>
+      <div class="columns">
+        <div class="col">
+          <div class="col-title">Туда</div>
+          ${selectVariant(g.id, 'outId', availOut(st.outHub), st.outHub, st.outId, 'Перелёт в Таиланд')}
+          ${legPlaque(c.leg1, g.id, 'leg1')}
+          ${flightPlaque('out', c.outSeg, c.outV, st.outHub, false)}
+        </div>
+        <div class="col">
+          <div class="col-title">Обратно</div>
+          ${selectVariant(g.id, 'backId', availBack(st.backHub), st.backHub, st.backId, 'Перелёт из Таиланда')}
+          ${flightPlaque('back', c.backSeg, c.backV, st.backHub, c.bundled)}
+          ${legPlaque(c.leg2, g.id, 'leg2')}
+        </div>
+      </div>
+      ${breakdown(g, c)}
+      </div>`;
+  }
+
+  function renderCard(g) {
+    const el = document.getElementById('card-' + g.id);
+    el.classList.toggle('collapsed', !!state[g.id].collapsed);
+    el.innerHTML = cardHTML(g);
+  }
+
+  function renderSummary() {
+    let sum = 0, missing = 0;
+    document.getElementById('summary-groups').innerHTML = groups.map(g => {
+      const c = calc(g);
+      if (c.total == null) missing++; else sum += c.total;
+      return `<div class="summary-group"><div class="n">${esc(g.name)}</div>
+        <div class="p${c.total == null ? ' unk' : ''}">${c.total == null ? 'цена уточняется' : fmt(c.total)}</div></div>`;
+    }).join('');
+    const label = document.getElementById('total-label');
+    label.innerHTML = missing
+      ? `Итого <span class="inc">(неполная: без ${missing} из ${groups.length} групп)</span>`
+      : 'Итого за всех';
+    document.getElementById('grand-total').textContent = fmt(sum);
+    document.body.style.paddingBottom = (document.getElementById('summary').offsetHeight + 16) + 'px';
+  }
+
+  // ---------- события ----------
+  document.getElementById('groups').addEventListener('click', e => {
+    const btn = e.target.closest('[data-toggle]');
+    if (!btn) return;
+    const gid = btn.dataset.toggle;
+    state[gid].collapsed = !state[gid].collapsed;
+    renderCard(groups.find(x => x.id === gid));
+    const again = document.querySelector(`[data-toggle="${gid}"]`);
+    if (again) again.focus();
+  });
+
+  document.getElementById('groups').addEventListener('change', e => {
+    const el = e.target, gid = el.dataset.g, f = el.dataset.f;
+    if (!gid) return;
+    const st = state[gid], v = el.value;
+    if (f === 'start') {
+      st.start = v;
+      if (st.auto.outHub) st.outHub = v;
+      if (st.auto.backHub) st.backHub = st.outHub;
+      if (st.auto.end) st.end = v;
+    } else if (f === 'outHub') {
+      st.outHub = v; st.auto.outHub = false;
+      if (st.auto.backHub) st.backHub = v;
+    } else if (f === 'backHub') {
+      st.backHub = v; st.auto.backHub = false;
+    } else if (f === 'end') {
+      st.end = v; st.auto.end = false;
+    } else if (f === 'outId' || f === 'backId') {
+      st[f] = v;
+    } else if (f === 'leg1' || f === 'leg2') {
+      st.legOpt[el.dataset.key] = v;
+    }
+    ensure(gid);
+    const g = groups.find(x => x.id === gid);
+    renderCard(g);
+    renderSummary();
+    const again = document.querySelector(`[data-g="${gid}"][data-f="${f}"]`);
+    if (again) again.focus();
+  });
+
+  // ---------- старт ----------
+  document.title = meta.title + ' · ' + meta.dates;
+  document.getElementById('title').textContent = meta.title;
+  const total = groups.reduce((s, g) => s + g.size, 0);
+  document.getElementById('subtitle').textContent = meta.dates + ' · ' + people(total);
+  const box = document.getElementById('groups');
+  box.innerHTML = groups.map(g => `<section class="group-card" id="card-${g.id}"></section>`).join('');
+  groups.forEach(renderCard);
+  renderSummary();
+})().catch(err => {
+  console.error(err);
+  document.body.innerHTML = '<div style="padding:40px;color:#dc2626">Не удалось загрузить данные: ' + err.message + '</div>';
+});
+</script>
+</body>
+</html>

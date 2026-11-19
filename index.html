@@ -71,7 +71,8 @@
 <script>
   // Список маршрутов
   const routes = [
-    { id: 'es26', name: 'Испания', flag: '🇪🇸' }
+    { id: 'es26', name: 'Испания', flag: '🇪🇸', status: 'Завершено' },
+    { id: 'th27', name: 'Таиланд', flag: '🇹🇭', status: 'Планируется', perPerson: true }
   ];
 
   Promise.all(routes.map(route => 
@@ -102,9 +103,24 @@
         return;
       }
 
-      const minOut = Math.min(...route.outbound.map(o => o.price));
-      const minBack = Math.min(...route.back.map(o => o.price));
-      const minPrice = minOut + minBack;
+      // es26: price лежит в самом варианте; th27: цены по городам в segments (+ bundle у обратных рейсов)
+      let minPrice;
+      if (route.outbound.some(v => v.segments && !Array.isArray(v.segments))) {
+        const cities = new Set(route.outbound.flatMap(v => Object.keys(v.segments)));
+        const sums = [];
+        cities.forEach(city => route.outbound.forEach(o => {
+          if (!o.segments[city]) return;
+          route.back.forEach(b => {
+            const bs = b.segments[city];
+            if (!bs) return;
+            const paired = bs.bundle && (b.bundleWith || []).includes(o.id);
+            sums.push(o.segments[city].price + (paired ? bs.bundle.price : bs.price));
+          });
+        }));
+        minPrice = Math.min(...sums);
+      } else {
+        minPrice = Math.min(...route.outbound.map(o => o.price)) + Math.min(...route.back.map(o => o.price));
+      }
       const fmt = n => n.toLocaleString("ru-RU") + " ₽";
       const year = route.meta.dates.split('–')[0].trim().split('.')[2];
       
@@ -118,8 +134,8 @@
         </div>
         <h3>${route.name}</h3>
         <p class="dates">${route.meta.dates}</p>
-        <div class="price">От ${fmt(minPrice)}</div>
-        <p class="status">Завершено</p>
+        <div class="price">От ${fmt(minPrice)}${route.perPerson ? ' <small>на 1 чел.</small>' : ''}</div>
+        <p class="status">${route.status}</p>
       `;
       container.appendChild(card);
     });

@@ -1,0 +1,838 @@
+{
+  "meta": {
+    "title": "Таиланд 2027",
+    "dates": "08.03.2027 – 26.03.2027",
+    "allCities": [
+      "Москва",
+      "Питер",
+      "Пермь",
+      "Екатеринбург"
+    ],
+    "groups": [
+      {
+        "id": "g1",
+        "name": "Гоша + Олеся",
+        "startCity": "Пермь",
+        "size": 2
+      },
+      {
+        "id": "g2",
+        "name": "Никита",
+        "startCity": "Пермь",
+        "size": 1
+      },
+      {
+        "id": "g3",
+        "name": "Паля + Маша",
+        "startCity": "Питер",
+        "size": 2
+      },
+      {
+        "id": "g4",
+        "name": "Дима + Вероника",
+        "startCity": "Москва",
+        "size": 2
+      }
+    ],
+    "feeders": [
+      {
+        "a": "Пермь",
+        "b": "Екатеринбург",
+        "options": [
+          {
+            "id": "train",
+            "mode": "Поезд",
+            "carrier": "РЖД",
+            "price": 1656,
+            "link": "https://clck.ru/3X823H",
+            "legs": {
+              "Пермь→Екатеринбург": {
+                "date": "28.01.2027",
+                "dep": "6:05",
+                "arr": "17:16"
+              },
+              "Екатеринбург→Пермь": {
+                "date": "11.02.2027",
+                "dep": "11:42",
+                "arr": "22:56"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "a": "Пермь",
+        "b": "Москва",
+        "options": [
+          {
+            "id": "plane",
+            "mode": "Самолёт",
+            "carrier": "Aeroflot",
+            "price": 9411,
+            "link": "https://avs.io/6FI8S",
+            "legs": {
+              "Пермь→Москва": {
+                "date": "11.03.2027",
+                "dep": "16:00",
+                "arr": "16:15"
+              },
+              "Москва→Пермь": {
+                "date": "24.03.2027",
+                "dep": "15:20",
+                "arr": "19:25"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "a": "Пермь",
+        "b": "Питер",
+        "options": [
+          {
+            "id": "plane",
+            "mode": "Самолёт",
+            "carrier": "Aeroflot",
+            "price": 10407,
+            "link": "https://avs.io/6FI4k",
+            "legs": {
+              "Пермь→Питер": {
+                "date": "11.03.2027",
+                "dep": "6:30",
+                "arr": "7:00"
+              },
+              "Питер→Пермь": {
+                "date": "24.03.2027",
+                "dep": "1:10",
+                "arr": "5:35"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "a": "Питер",
+        "b": "Москва",
+        "options": [
+          {
+            "id": "train",
+            "mode": "Поезд",
+            "carrier": "РЖД",
+            "price": 903,
+            "link": "https://clck.ru/3X826M",
+            "legs": {
+              "Питер→Москва": {
+                "date": "28.01.2027",
+                "dep": "17:15",
+                "arr": "22:58"
+              },
+              "Москва→Питер": {
+                "date": "11.02.2027",
+                "dep": "6:00",
+                "arr": "11:45"
+              }
+            }
+          },
+          {
+            "id": "plane",
+            "mode": "Самолёт",
+            "carrier": "S7",
+            "price": 5874,
+            "link": "https://avs.io/6FI1E",
+            "legs": {
+              "Питер→Москва": {
+                "date": "11.03.2027",
+                "dep": "18:45",
+                "arr": "20:20"
+              },
+              "Москва→Питер": {
+                "date": "24.03.2027",
+                "dep": "16:00",
+                "arr": "17:45"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "a": "Москва",
+        "b": "Екатеринбург",
+        "options": [
+          {
+            "id": "plane",
+            "mode": "Самолёт",
+            "carrier": "Aeroflot",
+            "price": 9411,
+            "link": null,
+            "legs": {
+              "Москва→Екатеринбург": {
+                "date": "24.03.2027",
+                "dep": "15:20",
+                "arr": "19:25"
+              },
+              "Екатеринбург→Москва": {
+                "date": "11.03.2027",
+                "dep": "16:00",
+                "arr": "16:15"
+              }
+            },
+            "estimate": true
+          }
+        ]
+      },
+      {
+        "a": "Питер",
+        "b": "Екатеринбург",
+        "options": [
+          {
+            "id": "plane",
+            "mode": "Самолёт",
+            "carrier": "Aeroflot",
+            "price": 10407,
+            "link": null,
+            "legs": {
+              "Питер→Екатеринбург": {
+                "date": "24.03.2027",
+                "dep": "1:10",
+                "arr": "5:35"
+              },
+              "Екатеринбург→Питер": {
+                "date": "11.03.2027",
+                "dep": "6:30",
+                "arr": "7:00"
+              }
+            },
+            "estimate": true
+          }
+        ]
+      }
+    ],
+    "defaultVariants": {
+      "Пермь": {
+        "out": "out-3",
+        "back": "back-5"
+      }
+    }
+  },
+  "outbound": [
+    {
+      "id": "out-1",
+      "title": "Бангкок, прямой",
+      "segments": {
+        "Москва": {
+          "date": "11.03.2027",
+          "time": "21:35",
+          "arrDate": "12.03.2027",
+          "arrTime": "10:40",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6Egix"
+          ],
+          "price": 45960,
+          "dest": "Бангкок"
+        },
+        "Питер": {
+          "date": "08.03.2027",
+          "time": "0:10",
+          "arrDate": "08.03.2027",
+          "arrTime": "14:10",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EgnJ"
+          ],
+          "price": 49415,
+          "dest": "Бангкок"
+        },
+        "Екатеринбург": {
+          "date": "12.03.2027",
+          "time": "2:30",
+          "arrDate": "12.03.2027",
+          "arrTime": "12:50",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6Egvf"
+          ],
+          "price": 46504,
+          "dest": "Бангкок"
+        }
+      }
+    },
+    {
+      "id": "out-2",
+      "title": "Бангкок, через Пекин",
+      "segments": {
+        "Москва": {
+          "date": "11.03.2027",
+          "time": "20:05",
+          "arrDate": "12.03.2027",
+          "arrTime": "23:35",
+          "airline": "Hainan",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6Egju"
+          ],
+          "price": 27693,
+          "dest": "Бангкок",
+          "note": "10ч в Пекине"
+        },
+        "Питер": {
+          "date": "10.03.2027",
+          "time": "20:10",
+          "arrDate": "11.03.2027",
+          "arrTime": "23:35",
+          "airline": "Hainan",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6Egrl"
+          ],
+          "price": 34291,
+          "dest": "Бангкок",
+          "note": "10ч в Пекине"
+        }
+      }
+    },
+    {
+      "id": "out-3",
+      "title": "Бангкок, через Новосибирск",
+      "segments": {
+        "Москва": {
+          "date": "09.03.2027",
+          "time": "13:40",
+          "arrDate": "10.03.2027",
+          "arrTime": "14:55",
+          "airline": "S7",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhJz"
+          ],
+          "price": 35407,
+          "dest": "Бангкок",
+          "note": "7ч Новосибирск ночью, 12 числа на 7к дешевле"
+        },
+        "Питер": {
+          "date": "09.03.2027",
+          "time": "13:30",
+          "arrDate": "10.03.2027",
+          "arrTime": "14:55",
+          "airline": "S7",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhLo"
+          ],
+          "price": 35758,
+          "dest": "Бангкок",
+          "note": "4-7ч Новосибирск ночью"
+        },
+        "Пермь": {
+          "date": "09.03.2027",
+          "time": "17:10",
+          "arrDate": "10.03.2027",
+          "arrTime": "14:55",
+          "airline": "S7",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhID"
+          ],
+          "price": 46365,
+          "dest": "Бангкок",
+          "note": "7ч Новосибирск ночью"
+        }
+      }
+    },
+    {
+      "id": "out-4",
+      "title": "Пхукет, через Ближний Восток",
+      "segments": {
+        "Москва": {
+          "date": "12.03.2027",
+          "time": "20:15",
+          "arrDate": "13.03.2027",
+          "arrTime": "15:50",
+          "airline": "Turkish Airlines",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhR1"
+          ],
+          "price": 38599,
+          "dest": "Пхукет"
+        },
+        "Питер": {
+          "date": "12.03.2027",
+          "time": "12:00",
+          "arrDate": "13.03.2027",
+          "arrTime": "6:30",
+          "airline": "Etihad Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhRz"
+          ],
+          "price": 52578,
+          "dest": "Пхукет"
+        }
+      }
+    },
+    {
+      "id": "out-5",
+      "title": "Пхукет, через Ташкент",
+      "segments": {
+        "Москва": {
+          "date": "11.03.2027",
+          "time": "9:15",
+          "arrDate": "12.03.2027",
+          "arrTime": "7:05",
+          "airline": "Centrum Air",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6Fa55"
+          ],
+          "price": 35483,
+          "dest": "Пхукет",
+          "note": "7ч в Ташкенте"
+        },
+        "Питер": {
+          "date": "11.03.2027",
+          "time": "11:00",
+          "arrDate": "12.03.2027",
+          "arrTime": "7:05",
+          "airline": "Centrum Air",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FaiQ"
+          ],
+          "price": 36981,
+          "dest": "Пхукет",
+          "note": "5ч в Ташкенте"
+        },
+        "Пермь": {
+          "date": "10.03.2027",
+          "time": "2:15",
+          "arrDate": "12.03.2027",
+          "arrTime": "7:05",
+          "airline": "Centrum Air",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6Fadb",
+            "https://avs.io/6Faea"
+          ],
+          "price": 45579,
+          "dest": "Пхукет",
+          "note": "41ч в Ташкенте",
+          "nights": 1
+        }
+      }
+    },
+    {
+      "id": "out-6",
+      "title": "Бангкок, Emirates через Дубай",
+      "segments": {
+        "Москва": {
+          "date": "09.03.2027",
+          "time": "21:45",
+          "arrDate": "10.03.2027",
+          "arrTime": "18:05",
+          "airline": "Emirates",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FyHQ"
+          ],
+          "price": 47103,
+          "dest": "Бангкок"
+        },
+        "Питер": {
+          "date": "09.03.2027",
+          "time": "23:15",
+          "arrDate": "10.03.2027",
+          "arrTime": "18:05",
+          "airline": "Emirates",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FyIv"
+          ],
+          "price": 58323,
+          "dest": "Бангкок"
+        }
+      }
+    },
+    {
+      "id": "out-7",
+      "title": "Пхукет, прямой",
+      "segments": {
+        "Екатеринбург": {
+          "date": "12.03.2027",
+          "time": "23:55",
+          "dest": "Пхукет",
+          "arrDate": "13.03.2027",
+          "arrTime": "10:25",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhRT"
+          ],
+          "price": 52004
+        }
+      }
+    }
+  ],
+  "back": [
+    {
+      "id": "back-1",
+      "title": "Из Краби, через Куала-Лумпур",
+      "segments": {
+        "Москва": {
+          "date": "25.03.2027",
+          "time": "13:00",
+          "arrDate": "26.03.2027",
+          "arrTime": "15:05",
+          "airline": "Malaysia Airlines + Air China",
+          "stops": 2,
+          "easy": false,
+          "links": [
+            "https://avs.io/6FamZ"
+          ],
+          "price": 33718,
+          "orig": "Краби",
+          "note": "Пересадка в Куала-Лумпуре"
+        },
+        "Питер": {
+          "date": "25.03.2027",
+          "time": "13:00",
+          "arrDate": "26.03.2027",
+          "arrTime": "8:25",
+          "airline": "Malaysia Airlines + Etihad Airways",
+          "stops": 2,
+          "easy": false,
+          "links": [
+            "https://avs.io/6FaQE"
+          ],
+          "price": 46938,
+          "orig": "Краби",
+          "note": "Пересадка в Куала-Лумпуре и Абу-даби"
+        }
+      }
+    },
+    {
+      "id": "back-2",
+      "title": "Из Пхукета, через Китай",
+      "segments": {
+        "Москва": {
+          "date": "24.03.2027",
+          "time": "0:05",
+          "arrDate": "24.03.2027",
+          "arrTime": "14:35",
+          "airline": "China Eastern",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6Fc0M"
+          ],
+          "price": 32261,
+          "orig": "Пхукет"
+        },
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "0:05",
+          "arrDate": "24.03.2027",
+          "arrTime": "19:05",
+          "airline": "China Eastern",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6Fc0f"
+          ],
+          "price": 31863,
+          "orig": "Пхукет",
+          "note": "8ч ночью в Шанхае"
+        }
+      }
+    },
+    {
+      "id": "back-3",
+      "title": "Из Бангкока, через Китай",
+      "segments": {
+        "Москва": {
+          "date": "25.03.2027",
+          "time": "5:05",
+          "arrDate": "25.03.2027",
+          "arrTime": "17:05",
+          "airline": "China Eastern",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FoCT"
+          ],
+          "price": 32360,
+          "orig": "Бангкок"
+        },
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "5:05",
+          "arrDate": "24.03.2027",
+          "arrTime": "19:05",
+          "airline": "China Eastern",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FoIb"
+          ],
+          "price": 31953,
+          "orig": "Бангкок"
+        }
+      }
+    },
+    {
+      "id": "back-4",
+      "title": "Из Бангкока, прямой",
+      "bundleWith": [
+        "out-1"
+      ],
+      "segments": {
+        "Москва": {
+          "date": "25.03.2027",
+          "time": "10:15",
+          "arrDate": "25.03.2027",
+          "arrTime": "16:25",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FHN2"
+          ],
+          "price": 69016,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 56343,
+            "links": [
+              "https://avs.io/6FoSy"
+            ]
+          }
+        },
+        "Питер": {
+          "date": "26.03.2027",
+          "time": "14:55",
+          "arrDate": "26.03.2027",
+          "arrTime": "22:10",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FHNH"
+          ],
+          "price": 75285,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 52347,
+            "links": [
+              "https://avs.io/6Fp4w"
+            ]
+          }
+        },
+        "Екатеринбург": {
+          "date": "25.03.2027",
+          "time": "16:05",
+          "arrDate": "26.03.2027",
+          "arrTime": "23:15",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FHO5"
+          ],
+          "price": 66098,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 57595,
+            "links": [
+              "https://avs.io/6Fp6T"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "back-5",
+      "title": "Из Бангкока, S7 с пересадкой",
+      "bundleWith": [
+        "out-3"
+      ],
+      "segments": {
+        "Москва": {
+          "date": "23.03.2027",
+          "time": "16:30",
+          "arrDate": "24.03.2027",
+          "arrTime": "10:55",
+          "airline": "S7",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6FHOI"
+          ],
+          "price": 76107,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 50034,
+            "links": [
+              "https://avs.io/6Fp8i"
+            ]
+          }
+        },
+        "Питер": {
+          "date": "23.03.2027",
+          "time": "16:30",
+          "arrDate": "24.03.2027",
+          "arrTime": "11:25",
+          "airline": "S7",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://clck.ru/3X7zSX"
+          ],
+          "price": 83396,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 53670,
+            "links": [
+              "https://avs.io/6Fp9e"
+            ]
+          }
+        },
+        "Пермь": {
+          "date": "24.03.2027",
+          "time": "15:55",
+          "arrDate": "25.03.2027",
+          "arrTime": "16:35",
+          "airline": "S7",
+          "stops": 1,
+          "easy": false,
+          "links": [
+            "https://avs.io/6FHVr"
+          ],
+          "price": 110376,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 60718,
+            "links": [
+              "https://avs.io/6Fpbd"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "back-6",
+      "title": "Из Бангкока, Emirates через Дубай",
+      "bundleWith": [
+        "out-6"
+      ],
+      "segments": {
+        "Москва": {
+          "date": "24.03.2027",
+          "time": "23:00",
+          "arrDate": "25.03.2027",
+          "arrTime": "14:35",
+          "airline": "Emirates",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FHVT"
+          ],
+          "price": 42348,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 12655,
+            "links": [
+              "https://avs.io/6Fpr8"
+            ]
+          }
+        },
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "23:00",
+          "arrDate": "25.03.2027",
+          "arrTime": "21:25",
+          "airline": "Emirates",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FHWk"
+          ],
+          "price": 62185,
+          "orig": "Бангкок",
+          "bundle": {
+            "price": 10341,
+            "links": [
+              "https://avs.io/6FptF"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "back-7",
+      "title": "Из Пхукета, прямой",
+      "bundleWith": [
+        "out-7"
+      ],
+      "segments": {
+        "Екатеринбург": {
+          "date": "26.03.2027",
+          "time": "13:45",
+          "orig": "Пхукет",
+          "arrDate": "26.03.2027",
+          "arrTime": "21:35",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "price": 91746,
+          "links": [
+            "https://avs.io/6FIkv"
+          ],
+          "bundle": {
+            "price": 89549,
+            "links": [
+              "https://avs.io/6FIjL"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "back-8",
+      "title": "Из Бангкока, через Доху",
+      "segments": {
+        "Москва": {
+          "date": "25.03.2027",
+          "time": "2:00",
+          "arrDate": "25.03.2027",
+          "arrTime": "14:55",
+          "airline": "Qatar Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FoDt"
+          ],
+          "price": 35106,
+          "orig": "Бангкок"
+        }
+      }
+    }
+  ]
+}
