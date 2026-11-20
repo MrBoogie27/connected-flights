@@ -103,18 +103,25 @@
         return;
       }
 
-      // es26: price лежит в самом варианте; th27: цены по городам в segments (+ bundle у обратных рейсов)
+      // es26: price лежит в самом варианте; th27: цены по городам в segments (+ bundle у обратных рейсов,
+      // + перелёт из Краби в аэропорт вылета, + чартер только парой туда-обратно)
       let minPrice;
       if (route.outbound.some(v => v.segments && !Array.isArray(v.segments))) {
         const cities = new Set(route.outbound.flatMap(v => Object.keys(v.segments)));
+        const krabi = route.meta.krabi || {};
         const sums = [];
         cities.forEach(city => route.outbound.forEach(o => {
           if (!o.segments[city]) return;
           route.back.forEach(b => {
             const bs = b.segments[city];
             if (!bs) return;
+            if (o.charter || b.charter) {
+              if (!(o.charter && b.charter && o.pairWith === b.id)) return;
+            }
+            const k = krabi[bs.orig];
+            const kp = k ? k.price : 0;
             const paired = bs.bundle && (b.bundleWith || []).includes(o.id);
-            sums.push(o.segments[city].price + (paired ? bs.bundle.price : bs.price));
+            sums.push(o.segments[city].price + (paired ? bs.bundle.price : bs.price) + kp);
           });
         }));
         minPrice = Math.min(...sums);

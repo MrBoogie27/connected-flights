@@ -128,7 +128,7 @@
 (async function () {
   const data = await (await fetch('../data/th27.json')).json();
   const { meta, outbound, back } = data;
-  const groups = meta.groups, cities = meta.allCities, feeders = meta.feeders;
+  const groups = meta.groups, cities = meta.allCities, feeders = meta.feeders, krabi = meta.krabi || {};
 
   const fmt = n => n.toLocaleString('ru-RU') + '\u00a0₽';
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -142,15 +142,27 @@
   // ---------- данные ----------
   const segOf = (v, hub) => v ? v.segments[hub] || null : null;
   const availOut = hub => outbound.filter(v => v.segments[hub]);
-  const availBack = hub => back.filter(v => v.segments[hub]);
+  // чартер обратно доступен только в паре с чартером туда: из общего списка он скрыт
+  const availBack = (hub, outV) => back.filter(v => v.segments[hub] &&
+    (v.charter ? !!(outV && outV.charter && outV.pairWith === v.id) : !(outV && outV.charter)));
   const titleOf = id => (outbound.find(v => v.id === id) || {}).title || id;
+
+  // перелёт из Краби в аэропорт вылета (Бангкок / Куала-Лумпур; Пхукет — условно бесплатно)
+  const krabiLeg = seg => {
+    if (!seg) return null;
+    const k = krabi[seg.orig];
+    return k ? Object.assign({ hub: seg.orig }, k) : { hub: seg.orig, unknown: true };
+  };
 
   // единым билетом: рейс «туда» из пары bundleWith и тот же хаб туда и обратно
   const isBundled = (backV, outV, st) =>
     !!(backV && outV && st.outHub === st.backHub && (backV.bundleWith || []).includes(outV.id));
   const backEff = (seg, bundled) => bundled && seg.bundle ? seg.bundle : seg;   // {price, links}
   const outPrice = (v, hub) => v.segments[hub].price;
-  const backPriceFor = (v, hub, outV, st) => backEff(v.segments[hub], isBundled(v, outV, st)).price;
+  const backPriceFor = (v, hub, outV, st) => {
+    const seg = v.segments[hub], k = krabiLeg(seg);
+    return backEff(seg, isBundled(v, outV, st)).price + (k && !k.unknown ? k.price : 0);
+  };
   const cheapestBy = (list, f) => list.length ? list.reduce((a, b) => f(b) < f(a) ? b : a) : null;
 
   // дорога между городами: free | priced | unknown
@@ -172,25 +184,42 @@
     state[g.id] = {
       start: g.startCity, outHub: g.startCity, backHub: g.startCity, end: g.startCity,
       auto: { outHub: true, backHub: true, end: true },
-      outId: null, backId: null, legOpt: {}, collapsed: false,
+      outId: null, backId: null, legOpt: {}, collapsed: false, charterOn: false, prevBackHub: null,
     };
     ensure(g.id);
   });
 
   function ensure(gid) {
     const st = state[gid];
-    const o = availOut(st.outHub), b = availBack(st.backHub);
+    const o = availOut(st.outHub);
     const pref = (meta.defaultVariants || {});
     if (!o.find(v => v.id === st.outId)) {
       const pid = (pref[st.outHub] || {}).out;
-      st.outId = o.find(v => v.id === pid) ? pid : (cheapestBy(o, v => outPrice(v, st.outHub)) || {}).id || null;
+      const free = o.filter(v => !v.charter);   // чартер сам не выбирается
+      st.outId = o.find(v => v.id === pid && !v.charter) ? pid
+        : (cheapestBy(free, v => outPrice(v, st.outHub)) || {}).id || null;
     }
+    const outV = outbound.find(v => v.id === st.outId) || null;
+
+    // чартер: только парой туда-обратно, хаб возвращения = хаб вылета
+    if (outV && outV.charter) {
+      if (!st.charterOn) { st.charterOn = true; st.prevBackHub = st.backHub; }
+      st.backHub = st.outHub;
+      st.backId = outV.pairWith;
+      return;
+    }
+    if (st.charterOn) {   // вышли из чартера: возвращаем прежний хаб, рейс обратно выберется заново
+      st.charterOn = false;
+      st.backHub = st.auto.backHub ? st.outHub : st.prevBackHub;
+      st.backId = null;
+    }
+
+    const b = availBack(st.backHub, outV);
     if (!b.find(v => v.id === st.backId)) {
       const pid = (pref[st.backHub] || {}).back;
       if (b.find(v => v.id === pid)) {
         st.backId = pid;
       } else {
-        const outV = outbound.find(v => v.id === st.outId);
         st.backId = (cheapestBy(b, v => backPriceFor(v, st.backHub, outV, st)) || {}).id || null;
       }
     }
@@ -203,33 +232,49 @@
     const backV = back.find(v => v.id === st.backId) || null;
     const outSeg = segOf(outV, st.outHub), backSeg = segOf(backV, st.backHub);
     const leg1 = leg(st.start, st.outHub, st, 'leg1'), leg2 = leg(st.backHub, st.end, st, 'leg2');
+    const kr = krabiLeg(backSeg);
     const bundled = !!(backSeg && isBundled(backV, outV, st));
     const backUse = backSeg ? backEff(backSeg, bundled) : null;
     const issues = [];
     if (!outSeg) issues.push('нет рейсов туда из города «' + st.outHub + '»');
     if (!backSeg) issues.push('нет рейсов обратно в город «' + st.backHub + '»');
     [leg1, leg2].forEach(l => { if (l.type === 'unknown') issues.push('нет данных о проезде ' + l.a + ' — ' + l.b); });
-    const perPerson = issues.length ? null : leg1.price + outSeg.price + backUse.price + leg2.price;
-    return { st, outV, backV, outSeg, backSeg, backUse, bundled, leg1, leg2, issues,
+    if (kr && kr.unknown) issues.push('нет данных о перелёте Краби — ' + kr.hub);
+    const perPerson = issues.length ? null : leg1.price + outSeg.price + backUse.price + kr.price + leg2.price;
+    return { st, outV, backV, outSeg, backSeg, backUse, bundled, leg1, leg2, kr, issues,
              perPerson, total: perPerson == null ? null : perPerson * g.size };
   }
 
   // ---------- отрисовка ----------
-  function selectCity(gid, field, value, label, noFlightsFor) {
+  function selectCity(gid, field, value, label, noFlightsFor, disabled) {
     const opts = cities.map(c => {
       const empty = noFlightsFor && !noFlightsFor(c);
       return `<option value="${esc(c)}"${c === value ? ' selected' : ''}>${esc(c)}${empty ? ' — нет рейсов' : ''}</option>`;
     }).join('');
-    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}">${opts}</select></div>`;
+    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
   }
 
-  function selectVariant(gid, field, list, hub, selId, label) {
+  function selectVariant(gid, field, list, hub, selId, label, disabled) {
     if (!list.length) {
       return `<div class="field"><label>${label}</label><select disabled><option>Нет рейсов</option></select></div>`;
     }
     const opts = list.map(v =>
       `<option value="${v.id}"${v.id === selId ? ' selected' : ''}>${esc(v.title)}</option>`).join('');
-    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}">${opts}</select></div>`;
+    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
+  }
+
+  function krabiPlaque(k) {
+    if (!k) return '';
+    if (k.unknown) {
+      return `<div class="plaque warn"><div class="route">Краби → ${esc(k.hub)}</div><div class="note">Нет данных о перелёте</div></div>`;
+    }
+    if (k.free) {
+      return `<div class="plaque leg"><div class="route">Краби → ${esc(k.hub)} · условно бесплатно</div></div>`;
+    }
+    const ref = k.date ? `<div class="meta">Справочно: ${shortDate(k.date)} ${k.dep} → ${k.arr}</div>` : '';
+    const link = k.link ? `<a href="${esc(k.link)}" target="_blank" rel="noopener">Билет</a>` : '';
+    return `<div class="plaque leg"><div class="route">Краби → ${esc(k.hub)} · Самолёт, ${esc(k.carrier)}</div>${ref}
+      <div class="price-line"><span>${link}</span><span class="price">${fmt(k.price)} <small>на 1 чел.</small></span></div></div>`;
   }
 
   function legPlaque(l, gid, field) {
@@ -285,7 +330,7 @@
   }
 
   function cardHTML(g) {
-    const c = calc(g), st = c.st;
+    const c = calc(g), st = c.st, locked = !!(c.outV && c.outV.charter);
     return `
       <button type="button" class="group-header" data-toggle="${g.id}" aria-expanded="${!st.collapsed}">
         <span class="group-title"><span class="chev"></span>${esc(g.name)}</span>
@@ -298,7 +343,7 @@
       <div class="points">
         ${selectCity(g.id, 'start', st.start, 'Старт')}
         ${selectCity(g.id, 'outHub', st.outHub, 'Хаб вылета в Таиланд', h => availOut(h).length > 0)}
-        ${selectCity(g.id, 'backHub', st.backHub, 'Хаб возвращения', h => availBack(h).length > 0)}
+        ${selectCity(g.id, 'backHub', st.backHub, locked ? 'Хаб возвращения (чартер)' : 'Хаб возвращения', h => availBack(h, c.outV).length > 0, locked)}
         ${selectCity(g.id, 'end', st.end, 'Конец маршрута')}
       </div>
       <div class="columns">
@@ -310,7 +355,9 @@
         </div>
         <div class="col">
           <div class="col-title">Обратно</div>
-          ${selectVariant(g.id, 'backId', availBack(st.backHub), st.backHub, st.backId, 'Перелёт из Таиланда')}
+          ${selectVariant(g.id, 'backId', availBack(st.backHub, c.outV), st.backHub, st.backId, 'Перелёт из Таиланда', locked)}
+          ${locked ? '<div class="chip">чартер: только туда-обратно одним билетом</div>' : ''}
+          ${krabiPlaque(c.kr)}
           ${flightPlaque('back', c.backSeg, c.backV, st.backHub, c.bundled)}
           ${legPlaque(c.leg2, g.id, 'leg2')}
         </div>
@@ -365,6 +412,7 @@
       st.outHub = v; st.auto.outHub = false;
       if (st.auto.backHub) st.backHub = v;
     } else if (f === 'backHub') {
+      if (st.charterOn) return;
       st.backHub = v; st.auto.backHub = false;
     } else if (f === 'end') {
       st.end = v; st.auto.end = false;

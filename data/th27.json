@@ -212,6 +212,30 @@
         "out": "out-3",
         "back": "back-5"
       }
+    },
+    "krabi": {
+      "Бангкок": {
+        "carrier": "Bangkok Airways",
+        "price": 3490,
+        "link": "https://avs.io/6FT79",
+        "date": "23.03.2027",
+        "dep": "22:00",
+        "arr": "23:30"
+      },
+      "Куала-Лумпур": {
+        "carrier": "AirAsia",
+        "price": 5549,
+        "link": "https://avs.io/6FT6z",
+        "date": "23.03.2027",
+        "dep": "11:50",
+        "arr": "14:20"
+      },
+      "Пхукет": {
+        "carrier": null,
+        "price": 0,
+        "link": null,
+        "free": true
+      }
     }
   },
   "outbound": [
@@ -352,7 +376,7 @@
     },
     {
       "id": "out-4",
-      "title": "Пхукет, через Ближний Восток",
+      "title": "Пхукет (Turkish, Etihad, Aeroflot прямой)",
       "segments": {
         "Москва": {
           "date": "12.03.2027",
@@ -380,6 +404,20 @@
             "https://avs.io/6EhRz"
           ],
           "price": 52578,
+          "dest": "Пхукет"
+        },
+        "Екатеринбург": {
+          "date": "12.03.2027",
+          "time": "23:55",
+          "arrDate": "13.03.2027",
+          "arrTime": "10:25",
+          "airline": "Aeroflot",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6EhRT"
+          ],
+          "price": 52004,
           "dest": "Пхукет"
         }
       }
@@ -473,59 +511,46 @@
     },
     {
       "id": "out-7",
-      "title": "Пхукет, прямой",
+      "title": "Пхукет, чартер Azur Air (только туда-обратно)",
       "segments": {
-        "Екатеринбург": {
-          "date": "12.03.2027",
-          "time": "23:55",
-          "dest": "Пхукет",
-          "arrDate": "13.03.2027",
-          "arrTime": "10:25",
-          "airline": "Aeroflot",
+        "Пермь": {
+          "date": "08.03.2027",
+          "time": "22:55",
+          "arrDate": "09.03.2027",
+          "arrTime": "10:05",
+          "airline": "Azur Air",
           "stops": 0,
           "easy": true,
           "links": [
-            "https://avs.io/6EhRT"
+            "https://avs.io/6FSZV"
           ],
-          "price": 52004
+          "price": 42069,
+          "dest": "Пхукет",
+          "note": "Чартер. Только единым билетом. 11 дней"
         }
-      }
+      },
+      "charter": true,
+      "pairWith": "back-8"
     }
   ],
   "back": [
     {
       "id": "back-1",
-      "title": "Из Краби, через Куала-Лумпур",
+      "title": "Из Куала-Лумпура, Qatar",
       "segments": {
         "Москва": {
-          "date": "25.03.2027",
-          "time": "13:00",
-          "arrDate": "26.03.2027",
-          "arrTime": "15:05",
-          "airline": "Malaysia Airlines + Air China",
-          "stops": 2,
-          "easy": false,
+          "date": "24.03.2027",
+          "time": "19:55",
+          "arrDate": "25.03.2027",
+          "arrTime": "8:00",
+          "airline": "Qatar Airways",
+          "stops": 1,
+          "easy": true,
           "links": [
-            "https://avs.io/6FamZ"
+            "https://avs.io/6FT8N"
           ],
-          "price": 33718,
-          "orig": "Краби",
-          "note": "Пересадка в Куала-Лумпуре"
-        },
-        "Питер": {
-          "date": "25.03.2027",
-          "time": "13:00",
-          "arrDate": "26.03.2027",
-          "arrTime": "8:25",
-          "airline": "Malaysia Airlines + Etihad Airways",
-          "stops": 2,
-          "easy": false,
-          "links": [
-            "https://avs.io/6FaQE"
-          ],
-          "price": 46938,
-          "orig": "Краби",
-          "note": "Пересадка в Куала-Лумпуре и Абу-даби"
+          "price": 28536,
+          "orig": "Куала-Лумпур"
         }
       }
     },
@@ -601,9 +626,6 @@
     {
       "id": "back-4",
       "title": "Из Бангкока, прямой",
-      "bundleWith": [
-        "out-1"
-      ],
       "segments": {
         "Москва": {
           "date": "25.03.2027",
@@ -665,14 +687,14 @@
             ]
           }
         }
-      }
+      },
+      "bundleWith": [
+        "out-1"
+      ]
     },
     {
       "id": "back-5",
       "title": "Из Бангкока, S7 с пересадкой",
-      "bundleWith": [
-        "out-3"
-      ],
       "segments": {
         "Москва": {
           "date": "23.03.2027",
@@ -734,14 +756,14 @@
             ]
           }
         }
-      }
+      },
+      "bundleWith": [
+        "out-3"
+      ]
     },
     {
       "id": "back-6",
       "title": "Из Бангкока, Emirates через Дубай",
-      "bundleWith": [
-        "out-6"
-      ],
       "segments": {
         "Москва": {
           "date": "24.03.2027",
@@ -783,28 +805,28 @@
             ]
           }
         }
-      }
+      },
+      "bundleWith": [
+        "out-6"
+      ]
     },
     {
       "id": "back-7",
       "title": "Из Пхукета, прямой",
-      "bundleWith": [
-        "out-7"
-      ],
       "segments": {
         "Екатеринбург": {
           "date": "26.03.2027",
           "time": "13:45",
-          "orig": "Пхукет",
           "arrDate": "26.03.2027",
           "arrTime": "21:35",
           "airline": "Aeroflot",
           "stops": 0,
           "easy": true,
-          "price": 91746,
           "links": [
             "https://avs.io/6FIkv"
           ],
+          "price": 91746,
+          "orig": "Пхукет",
           "bundle": {
             "price": 89549,
             "links": [
@@ -812,10 +834,131 @@
             ]
           }
         }
-      }
+      },
+      "bundleWith": [
+        "out-4"
+      ]
     },
     {
       "id": "back-8",
+      "title": "Из Пхукета, чартер Azur Air (только туда-обратно)",
+      "segments": {
+        "Пермь": {
+          "date": "20.03.2027",
+          "time": "12:25",
+          "arrDate": "20.03.2027",
+          "arrTime": "20:00",
+          "airline": "Azur Air",
+          "stops": 0,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FSZV"
+          ],
+          "price": 42069,
+          "orig": "Пхукет",
+          "note": "Чартер. Только единым билетом. 11 дней"
+        }
+      },
+      "charter": true,
+      "pairWith": "out-7"
+    },
+    {
+      "id": "back-9",
+      "title": "Из Куала-Лумпура, Etihad",
+      "segments": {
+        "Москва": {
+          "date": "24.03.2027",
+          "time": "9:30",
+          "arrDate": "24.03.2027",
+          "arrTime": "19:30",
+          "airline": "Etihad Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FT9E"
+          ],
+          "price": 30066,
+          "orig": "Куала-Лумпур"
+        },
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "9:30",
+          "arrDate": "25.03.2027",
+          "arrTime": "8:25",
+          "airline": "Etihad Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FTdH"
+          ],
+          "price": 37889,
+          "orig": "Куала-Лумпур",
+          "note": "14ч в Абу-Даби"
+        }
+      }
+    },
+    {
+      "id": "back-10",
+      "title": "Из Куала-Лумпура, Emirates",
+      "segments": {
+        "Москва": {
+          "date": "24.03.2027",
+          "time": "18:25",
+          "arrDate": "25.03.2027",
+          "arrTime": "6:50",
+          "airline": "Emirates",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FT97"
+          ],
+          "price": 29319,
+          "orig": "Куала-Лумпур"
+        }
+      }
+    },
+    {
+      "id": "back-11",
+      "title": "Из Куала-Лумпура, Etihad (вечерний)",
+      "segments": {
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "21:40",
+          "arrDate": "25.03.2027",
+          "arrTime": "8:25",
+          "airline": "Etihad Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FTeZ"
+          ],
+          "price": 37889,
+          "orig": "Куала-Лумпур"
+        }
+      }
+    },
+    {
+      "id": "back-12",
+      "title": "Из Куала-Лумпура, Turkish",
+      "segments": {
+        "Питер": {
+          "date": "24.03.2027",
+          "time": "8:15",
+          "arrDate": "24.03.2027",
+          "arrTime": "23:35",
+          "airline": "Turkish Airlines",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6FTeO"
+          ],
+          "price": 37551,
+          "orig": "Куала-Лумпур"
+        }
+      }
+    },
+    {
+      "id": "back-13",
       "title": "Из Бангкока, через Доху",
       "segments": {
         "Москва": {
