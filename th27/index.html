@@ -12,28 +12,46 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 18px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
+  .section-title { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin: 26px 0 10px; }
+  .builder-title { font-weight: 600; font-size: 16px; margin-bottom: 14px; }
+
+  .cart-head { display: flex; align-items: center; gap: 10px; }
   .group-header {
+    flex: 1; min-width: 0;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+    padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
     font: inherit; color: inherit; text-align: left;
   }
   .group-header:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
-  .group-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
-  .chev { display: inline-block; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  .group-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; min-width: 0; }
+  .group-title .t { min-width: 0; }
+  .chev { flex: none; display: inline-block; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
     transform: rotate(45deg); transition: transform .15s; margin-top: -3px; }
   .group-card.collapsed .chev { transform: rotate(-45deg); margin-top: 0; }
-  .group-size { color: var(--muted); font-size: 13px; font-weight: 400; }
-  .group-right { display: flex; align-items: baseline; gap: 14px; }
-  .group-sum { font-weight: 700; font-size: 15px; color: var(--accent); }
-  .group-sum.unk { color: #b45309; font-weight: 500; font-size: 13px; }
+  .group-size { color: var(--muted); font-size: 13px; font-weight: 400; white-space: nowrap; }
+  .group-route { color: var(--muted); font-size: 12px; font-weight: 400; margin-top: 1px; }
+  .group-right { display: flex; align-items: baseline; gap: 14px; flex: none; }
+  .group-sum { font-weight: 700; font-size: 15px; color: var(--accent); white-space: nowrap; }
+  .group-sum small { font-weight: 400; color: var(--muted); font-size: 11px; }
   .group-body { margin-top: 14px; }
   .group-card.collapsed .group-body { display: none; }
-  .group-card.collapsed { padding-bottom: 14px; }
+  .group-card.collapsed { padding-bottom: 14px; padding-top: 14px; }
+
+  .trash {
+    flex: none; width: 34px; height: 34px; padding: 0; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--card); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .trash:hover { color: #dc2626; border-color: #fca5a5; background: #fef2f2; }
+  .trash:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .trash svg { width: 18px; height: 18px; }
+
+  .cart-empty { color: var(--muted); font-size: 14px; padding: 18px; text-align: center;
+    border: 1px dashed var(--border); border-radius: 12px; }
 
   .points {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
     padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
   }
   .field label { display: block; font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
@@ -46,6 +64,7 @@
   select:disabled { background: var(--bg); color: var(--muted); cursor: not-allowed; }
 
   .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col { min-width: 0; }
   .col-title { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
   .col .field { margin-bottom: 10px; }
 
@@ -80,7 +99,19 @@
   .breakdown .row:first-child span:last-child { font-weight: 600; }
   .breakdown .row.total { font-size: 18px; font-weight: 700; color: var(--accent); }
   .breakdown .row.total span:first-child { color: var(--accent); }
+  .breakdown .row.total span:last-child { font-weight: 700; }
   .breakdown .issues { margin-top: 8px; color: #b45309; font-size: 12px; }
+
+  .add-row { display: flex; justify-content: flex-end; margin-top: 12px; }
+  .btn {
+    padding: 10px 22px; border: 0; border-radius: 8px; background: var(--accent); color: #fff;
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn:disabled { background: #cbd5e1; cursor: not-allowed; filter: none; }
+  .btn { white-space: nowrap; }
+  .btn.need-pair:disabled { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
 
   .summary-box {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
@@ -89,21 +120,23 @@
     padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
   }
   .summary-inner { max-width: 1080px; margin: 0 auto; }
+  .summary-total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 8px; border-top: 2px solid var(--border); }
   .summary-groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 8px; }
-  .summary-group { font-size: 12px; }
+  .summary-group { font-size: 12px; min-width: 0; }
   .summary-group .n { color: var(--muted); }
   .summary-group .p { font-weight: 600; font-size: 14px; }
-  .summary-group .p.unk { color: #b45309; font-weight: 500; font-size: 12px; }
-  .summary-total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 8px; border-top: 2px solid var(--border); }
+  .summary-group.none .p { color: var(--muted); font-weight: 400; }
+  .all-added { color: var(--muted); font-size: 14px; padding: 4px 0; }
   .summary-label { color: var(--muted); font-size: 13px; }
-  .summary-label .inc { color: #b45309; }
+  .summary-label .inc { color: #475569; }
   .summary-price { font-size: 22px; font-weight: 800; color: var(--accent); }
 
   @media (max-width: 760px) {
     .points { grid-template-columns: 1fr 1fr; }
-    .columns { grid-template-columns: 1fr; }
     .summary-groups { grid-template-columns: 1fr 1fr; }
+    .columns { grid-template-columns: 1fr; }
     .summary-box { padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
+    .group-right { flex-direction: column; align-items: flex-end; gap: 0; }
   }
 </style>
 </head>
@@ -111,14 +144,18 @@
 <div class="wrap">
   <h1 id="title">Таиланд 2027</h1>
   <p class="sub" id="subtitle"></p>
-  <div id="groups"></div>
+
+  <section class="group-card" id="builder"></section>
+
+  <div class="section-title" id="cart-title">Корзина</div>
+  <div id="cart"></div>
 </div>
 
 <div class="summary-box" id="summary">
   <div class="summary-inner">
     <div class="summary-groups" id="summary-groups"></div>
     <div class="summary-total">
-      <div class="summary-label" id="total-label">Итого</div>
+      <div class="summary-label" id="total-label">Корзина пуста</div>
       <div class="summary-price" id="grand-total">—</div>
     </div>
   </div>
@@ -129,6 +166,8 @@
   const data = await (await fetch('../data/th27.json')).json();
   const { meta, outbound, back } = data;
   const groups = meta.groups, cities = meta.allCities, feeders = meta.feeders, krabi = meta.krabi || {};
+  const STORE = 'th27.cart.v1';
+  const DRAFT = 'th27.draft.v1';
 
   const fmt = n => n.toLocaleString('ru-RU') + '\u00a0₽';
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -138,6 +177,7 @@
     return n + (m10 === 1 && m100 !== 11 ? ' человек' : (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) ? ' человека' : ' человек');
   };
   const stopsText = n => n === 0 ? 'прямой' : n + (n === 1 ? ' пересадка' : n < 5 ? ' пересадки' : ' пересадок');
+  const groupOf = id => groups.find(g => g.id === id) || null;
 
   // ---------- данные ----------
   const segOf = (v, hub) => v ? v.segments[hub] || null : null;
@@ -145,7 +185,9 @@
   // чартер обратно доступен только в паре с чартером туда: из общего списка он скрыт
   const availBack = (hub, outV) => back.filter(v => v.segments[hub] &&
     (v.charter ? !!(outV && outV.charter && outV.pairWith === v.id) : !(outV && outV.charter)));
-  const titleOf = id => (outbound.find(v => v.id === id) || {}).title || id;
+  // название варианта для хаба: у сегмента может быть своё (Пхукет Turkish / Etihad / прямой Aeroflot)
+  const titleFor = (v, hub) => ((v.segments && v.segments[hub]) || {}).title || v.title;
+  const titleOf = (id, hub) => { const v = outbound.find(x => x.id === id); return v ? titleFor(v, hub) : id; };
 
   // перелёт из Краби в аэропорт вылета (Бангкок / Куала-Лумпур; Пхукет — условно бесплатно)
   const krabiLeg = seg => {
@@ -179,18 +221,21 @@
   }
 
   // ---------- состояние ----------
-  const state = {};
-  groups.forEach(g => {
-    state[g.id] = {
-      start: g.startCity, outHub: g.startCity, backHub: g.startCity, end: g.startCity,
+  // st: { gid|null, size, start, outHub, backHub, end, auto, outId, backId, legOpt, charterOn, prevBackHub }
+  function newDraft(gid) {
+    const g = groupOf(gid);
+    const start = g ? g.startCity : cities[0];
+    const st = {
+      gid: g ? g.id : null, size: g ? g.size : 1,
+      start, outHub: start, backHub: start, end: start,
       auto: { outHub: true, backHub: true, end: true },
-      outId: null, backId: null, legOpt: {}, collapsed: false, charterOn: false, prevBackHub: null,
+      outId: null, backId: null, legOpt: {}, charterOn: false, prevBackHub: null,
     };
-    ensure(g.id);
-  });
+    ensure(st);
+    return st;
+  }
 
-  function ensure(gid) {
-    const st = state[gid];
+  function ensure(st) {
     const o = availOut(st.outHub);
     const pref = (meta.defaultVariants || {});
     if (!o.find(v => v.id === st.outId)) {
@@ -226,8 +271,7 @@
   }
 
   // ---------- расчёт ----------
-  function calc(g) {
-    const st = state[g.id];
+  function calc(st) {
     const outV = outbound.find(v => v.id === st.outId) || null;
     const backV = back.find(v => v.id === st.backId) || null;
     const outSeg = segOf(outV, st.outHub), backSeg = segOf(backV, st.backHub);
@@ -241,26 +285,116 @@
     [leg1, leg2].forEach(l => { if (l.type === 'unknown') issues.push('нет данных о проезде ' + l.a + ' — ' + l.b); });
     if (kr && kr.unknown) issues.push('нет данных о перелёте Краби — ' + kr.hub);
     const perPerson = issues.length ? null : leg1.price + outSeg.price + backUse.price + kr.price + leg2.price;
-    return { st, outV, backV, outSeg, backSeg, backUse, bundled, leg1, leg2, kr, issues,
-             perPerson, total: perPerson == null ? null : perPerson * g.size };
+    // без пары — только цена на 1 человека
+    const total = perPerson == null ? null : (st.gid ? perPerson * st.size : perPerson);
+    return { st, outV, backV, outSeg, backSeg, backUse, bundled, leg1, leg2, kr, issues, perPerson, total };
+  }
+
+  // ---------- корзина ----------
+  let cart = [];            // [{ uid, open, st }]
+  let uidSeq = 0;
+  let draft = newDraft(null);
+
+  const pickFields = st => ({ gid: st.gid, start: st.start, outHub: st.outHub, backHub: st.backHub,
+    end: st.end, outId: st.outId, backId: st.backId, legOpt: st.legOpt });
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify({ items: cart.map(e => pickFields(e.st)) })); } catch (e) { /* без хранилища */ }
+  }
+
+  function load() {
+    let raw;
+    try { raw = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) { raw = null; }
+    if (!raw || !Array.isArray(raw.items)) return;
+    const used = new Set();
+    raw.items.forEach(it => {
+      if (!it || typeof it !== 'object') return;
+      const g = it.gid ? groupOf(it.gid) : null;
+      if (!g || used.has(g.id)) return;               // в корзине только маршруты с парой
+      if (!cities.includes(it.start) || !cities.includes(it.outHub) || !cities.includes(it.backHub) || !cities.includes(it.end)) return;
+      const st = { gid: g ? g.id : null, size: g ? g.size : 1, start: it.start, outHub: it.outHub, backHub: it.backHub,
+        end: it.end, auto: { outHub: false, backHub: false, end: false }, outId: it.outId, backId: it.backId,
+        legOpt: (it.legOpt && typeof it.legOpt === 'object') ? it.legOpt : {}, charterOn: false, prevBackHub: null };
+      const c = calc(st);
+      if (!c.outV || !c.backV || !c.outSeg || !c.backSeg || c.total == null) return;
+      if ((c.outV.charter || c.backV.charter) && !(c.outV.charter && c.backV.charter && c.outV.pairWith === c.backV.id)) return;
+      if (g) used.add(g.id);
+      cart.push({ uid: ++uidSeq, open: false, st });
+    });
+  }
+
+  // черновик конструктора переживает перезагрузку
+  function saveDraft() {
+    try {
+      const d = draft;
+      localStorage.setItem(DRAFT, JSON.stringify({ gid: d.gid, start: d.start, outHub: d.outHub, backHub: d.backHub,
+        end: d.end, auto: d.auto, outId: d.outId, backId: d.backId, legOpt: d.legOpt,
+        charterOn: d.charterOn, prevBackHub: d.prevBackHub }));
+    } catch (e) { /* без хранилища */ }
+  }
+
+  function loadDraft() {
+    let r;
+    try { r = JSON.parse(localStorage.getItem(DRAFT) || 'null'); } catch (e) { r = null; }
+    if (!r || typeof r !== 'object') return;
+    if (![r.start, r.outHub, r.backHub, r.end].every(c => cities.includes(c))) return;
+    const used = new Set(cart.map(e => e.st.gid));
+    const g = r.gid && !used.has(r.gid) ? groupOf(r.gid) : null;   // пара уже в корзине или исчезла -> без пары
+    const a = (r.auto && typeof r.auto === 'object') ? r.auto : {};
+    draft = {
+      gid: g ? g.id : null, size: g ? g.size : 1,
+      start: r.start, outHub: r.outHub, backHub: r.backHub, end: r.end,
+      auto: { outHub: !!a.outHub, backHub: !!a.backHub, end: !!a.end },
+      outId: typeof r.outId === 'string' ? r.outId : null, backId: typeof r.backId === 'string' ? r.backId : null,
+      legOpt: (r.legOpt && typeof r.legOpt === 'object' && !Array.isArray(r.legOpt)) ? r.legOpt : {},
+      charterOn: !!r.charterOn, prevBackHub: cities.includes(r.prevBackHub) ? r.prevBackHub : r.outHub,
+    };
+    ensure(draft);   // недоступные рейсы заменятся доступными
   }
 
   // ---------- отрисовка ----------
-  function selectCity(gid, field, value, label, noFlightsFor, disabled) {
+  function selectPair(st) {
+    const used = new Set(cart.map(e => e.st.gid).filter(Boolean));
+    const opts = ['<option value="">Без пары</option>'].concat(groups
+      .filter(g => !used.has(g.id))
+      .map(g => `<option value="${g.id}"${g.id === st.gid ? ' selected' : ''}>${esc(g.name)} (${people(g.size)})</option>`));
+    return `<div class="field"><label>Пара</label><select data-f="gid">${opts.join('')}</select></div>`;
+  }
+
+  function selectCity(field, value, label, noFlightsFor, disabled) {
     const opts = cities.map(c => {
       const empty = noFlightsFor && !noFlightsFor(c);
       return `<option value="${esc(c)}"${c === value ? ' selected' : ''}>${esc(c)}${empty ? ' — нет рейсов' : ''}</option>`;
     }).join('');
-    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
+    return `<div class="field"><label>${label}</label><select data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
   }
 
-  function selectVariant(gid, field, list, hub, selId, label, disabled) {
+  function selectVariant(field, list, selId, label, disabled, hub) {
     if (!list.length) {
       return `<div class="field"><label>${label}</label><select disabled><option>Нет рейсов</option></select></div>`;
     }
     const opts = list.map(v =>
-      `<option value="${v.id}"${v.id === selId ? ' selected' : ''}>${esc(v.title)}</option>`).join('');
-    return `<div class="field"><label>${label}</label><select data-g="${gid}" data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
+      `<option value="${v.id}"${v.id === selId ? ' selected' : ''}>${esc(titleFor(v, hub))}</option>`).join('');
+    return `<div class="field"><label>${label}</label><select data-f="${field}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
+  }
+
+  function legPlaque(l, field, ro) {
+    if (l.type === 'free') return '';
+    if (l.type === 'unknown') {
+      return `<div class="plaque warn"><div class="route">${esc(l.a)} → ${esc(l.b)}</div>
+        <div class="note">Нет данных о проезде</div></div>`;
+    }
+    const o = l.option;
+    const picker = !ro && l.options.length > 1
+      ? `<div class="field" style="margin:6px 0"><select data-f="${field}" data-key="${esc(l.key)}">${
+          l.options.map(x => `<option value="${x.id}"${x.id === o.id ? ' selected' : ''}>${esc(x.mode)} · ${esc(x.carrier)} — ${fmt(x.price)}</option>`).join('')
+        }</select></div>` : '';
+    const ref = l.ref ? `<div class="meta">Справочно: ${shortDate(l.ref.date)} ${l.ref.dep} → ${l.ref.arr}</div>` : '';
+    const est = o.estimate ? `<div class="chip">ориентировочно, по аналогии с рейсами в Пермь</div>` : '';
+    const link = o.link ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">Билет</a>` : '';
+    return `<div class="plaque leg"><div class="route">${esc(l.a)} → ${esc(l.b)} · ${esc(o.mode)}, ${esc(o.carrier)}</div>
+      ${picker}${ref}${est}
+      <div class="price-line"><span>${link}</span><span class="price">${fmt(l.price)} <small>на 1 чел.</small></span></div></div>`;
   }
 
   function krabiPlaque(k) {
@@ -277,25 +411,6 @@
       <div class="price-line"><span>${link}</span><span class="price">${fmt(k.price)} <small>на 1 чел.</small></span></div></div>`;
   }
 
-  function legPlaque(l, gid, field) {
-    if (l.type === 'free') return '';
-    if (l.type === 'unknown') {
-      return `<div class="plaque warn"><div class="route">${esc(l.a)} → ${esc(l.b)}</div>
-        <div class="note">Нет данных о проезде</div></div>`;
-    }
-    const o = l.option;
-    const picker = l.options.length > 1
-      ? `<div class="field" style="margin:6px 0"><select data-g="${gid}" data-f="${field}" data-key="${esc(l.key)}">${
-          l.options.map(x => `<option value="${x.id}"${x.id === o.id ? ' selected' : ''}>${esc(x.mode)} · ${esc(x.carrier)} — ${fmt(x.price)}</option>`).join('')
-        }</select></div>` : '';
-    const ref = l.ref ? `<div class="meta">Справочно: ${shortDate(l.ref.date)} ${l.ref.dep} → ${l.ref.arr}</div>` : '';
-    const est = o.estimate ? `<div class="chip">ориентировочно, по аналогии с рейсами в Пермь</div>` : '';
-    const link = o.link ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">Билет</a>` : '';
-    return `<div class="plaque leg"><div class="route">${esc(l.a)} → ${esc(l.b)} · ${esc(o.mode)}, ${esc(o.carrier)}</div>
-      ${picker}${ref}${est}
-      <div class="price-line"><span>${link}</span><span class="price">${fmt(l.price)} <small>на 1 чел.</small></span></div></div>`;
-  }
-
   function flightPlaque(kind, seg, variant, hub, bundled) {
     if (!seg) return `<div class="plaque empty">Нет рейсов ${kind === 'out' ? 'из' : 'в'} города «${esc(hub)}»</div>`;
     const route = kind === 'out' ? `${esc(hub)} → ${esc(seg.dest)}` : `${esc(seg.orig)} → ${esc(hub)}`;
@@ -304,7 +419,7 @@
       `<a href="${esc(l)}" target="_blank" rel="noopener">Билет${use.links.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('');
     let chip = '';
     if (kind === 'back' && seg.bundle) {
-      const pairs = (variant.bundleWith || []).map(id => '«' + titleOf(id) + '»').join(', ');
+      const pairs = (variant.bundleWith || []).map(id => '«' + titleOf(id, hub) + '»').join(', ');
       chip = bundled
         ? `<div class="chip ok">единым билетом с рейсом туда</div>`
         : `<div class="chip">отдельным билетом · единым билетом ${fmt(seg.bundle.price)}, если туда ${esc(pairs)} и тот же хаб</div>`;
@@ -321,89 +436,141 @@
     </div>`;
   }
 
-  function breakdown(g, c) {
-    return `<div class="breakdown">
-      <div class="row"><span>На 1 человека</span><span>${c.perPerson == null ? 'уточняется' : fmt(c.perPerson)}</span></div>
-      <div class="row total"><span>Итого × ${g.size}</span><span>${c.total == null ? 'уточняется' : fmt(c.total)}</span></div>
+  function breakdown(c) {
+    const st = c.st, pp = c.perPerson == null ? 'уточняется' : fmt(c.perPerson);
+    const rows = st.gid
+      ? `<div class="row"><span>На 1 человека</span><span>${pp}</span></div>
+         <div class="row total"><span>Итого × ${st.size}</span><span>${c.total == null ? 'уточняется' : fmt(c.total)}</span></div>`
+      : `<div class="row total"><span>На 1 человека</span><span>${pp}</span></div>`;
+    return `<div class="breakdown">${rows}
       ${c.issues.length ? `<div class="issues">${c.issues.map(i => '• ' + esc(i)).join('<br>')}</div>` : ''}
     </div>`;
   }
 
-  function cardHTML(g) {
-    const c = calc(g), st = c.st, locked = !!(c.outV && c.outV.charter);
+  // конструктор
+  function builderHTML() {
+    const st = draft, c = calc(st), locked = !!(c.outV && c.outV.charter);
     return `
-      <button type="button" class="group-header" data-toggle="${g.id}" aria-expanded="${!st.collapsed}">
-        <span class="group-title"><span class="chev"></span>${esc(g.name)}</span>
-        <span class="group-right">
-          <span class="group-size">${people(g.size)}</span>
-          <span class="group-sum${c.total == null ? ' unk' : ''}">${c.total == null ? 'цена уточняется' : fmt(c.total)}</span>
-        </span>
-      </button>
-      <div class="group-body">
+      <div class="builder-title">Конструктор маршрута</div>
       <div class="points">
-        ${selectCity(g.id, 'start', st.start, 'Старт')}
-        ${selectCity(g.id, 'outHub', st.outHub, 'Хаб вылета в Таиланд', h => availOut(h).length > 0)}
-        ${selectCity(g.id, 'backHub', st.backHub, locked ? 'Хаб возвращения (чартер)' : 'Хаб возвращения', h => availBack(h, c.outV).length > 0, locked)}
-        ${selectCity(g.id, 'end', st.end, 'Конец маршрута')}
+        ${selectPair(st)}
+        ${selectCity('start', st.start, 'Старт')}
+        ${selectCity('outHub', st.outHub, 'Хаб вылета в Таиланд', h => availOut(h).length > 0)}
+        ${selectCity('backHub', st.backHub, locked ? 'Хаб возвращения (чартер)' : 'Хаб возвращения', h => availBack(h, c.outV).length > 0, locked)}
+        ${selectCity('end', st.end, 'Конец маршрута')}
       </div>
       <div class="columns">
         <div class="col">
           <div class="col-title">Туда</div>
-          ${selectVariant(g.id, 'outId', availOut(st.outHub), st.outHub, st.outId, 'Перелёт в Таиланд')}
-          ${legPlaque(c.leg1, g.id, 'leg1')}
+          ${selectVariant('outId', availOut(st.outHub), st.outId, 'Перелёт в Таиланд', false, st.outHub)}
+          ${legPlaque(c.leg1, 'leg1', false)}
           ${flightPlaque('out', c.outSeg, c.outV, st.outHub, false)}
         </div>
         <div class="col">
           <div class="col-title">Обратно</div>
-          ${selectVariant(g.id, 'backId', availBack(st.backHub, c.outV), st.backHub, st.backId, 'Перелёт из Таиланда', locked)}
+          ${selectVariant('backId', availBack(st.backHub, c.outV), st.backId, 'Перелёт из Таиланда', locked, st.backHub)}
           ${locked ? '<div class="chip">чартер: только туда-обратно одним билетом</div>' : ''}
           ${krabiPlaque(c.kr)}
           ${flightPlaque('back', c.backSeg, c.backV, st.backHub, c.bundled)}
-          ${legPlaque(c.leg2, g.id, 'leg2')}
+          ${legPlaque(c.leg2, 'leg2', false)}
         </div>
       </div>
-      ${breakdown(g, c)}
+      ${breakdown(c)}
+      <div class="add-row"><button type="button" class="btn${st.gid ? '' : ' need-pair'}" id="add"${(c.total == null || !st.gid) ? ' disabled' : ''}>${st.gid ? 'Добавить' : 'Выберите пару'}</button></div>`;
+  }
+
+  function allPairsAdded() {
+    return groups.every(g => cart.some(e => e.st.gid === g.id));
+  }
+
+  function renderBuilder() {
+    const box = document.getElementById('builder');
+    if (allPairsAdded()) {
+      box.innerHTML = '<div class="all-added">Все пары добавлены. Удалите маршрут из корзины, чтобы собрать заново.</div>';
+      return;
+    }
+    box.innerHTML = builderHTML();
+  }
+
+  // краткий маршрут: Пермь → Бангкок → Пермь
+  function routeText(c) {
+    const st = c.st;
+    const parts = [st.start, st.outHub, c.outSeg && c.outSeg.dest, c.backSeg && c.backSeg.orig, st.backHub, st.end].filter(Boolean);
+    return parts.filter((p, i) => i === 0 || p !== parts[i - 1]).join(' → ');
+  }
+
+  const TRASH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>';
+
+  function cartCardHTML(e) {
+    const c = calc(e.st), st = e.st, g = groupOf(st.gid);
+    const name = g ? g.name : 'Без пары · ' + st.start;
+    return `
+      <div class="cart-head">
+        <button type="button" class="group-header" data-toggle="${e.uid}" aria-expanded="${e.open}">
+          <span class="group-title"><span class="chev"></span>
+            <span class="t">${esc(name)}<div class="group-route">${esc(routeText(c))}</div></span></span>
+          <span class="group-right">
+            <span class="group-size">${g ? people(g.size) : ''}</span>
+            <span class="group-sum">${fmt(c.total)}${g ? '' : ' <small>на 1 чел.</small>'}</span>
+          </span>
+        </button>
+        <button type="button" class="trash" data-del="${e.uid}" aria-label="Удалить маршрут: ${esc(name)}" title="Удалить">${TRASH}</button>
+      </div>
+      <div class="group-body">
+        <div class="columns">
+          <div class="col">
+            <div class="col-title">Туда</div>
+            ${legPlaque(c.leg1, 'leg1', true)}
+            ${flightPlaque('out', c.outSeg, c.outV, st.outHub, false)}
+          </div>
+          <div class="col">
+            <div class="col-title">Обратно</div>
+            ${krabiPlaque(c.kr)}
+            ${flightPlaque('back', c.backSeg, c.backV, st.backHub, c.bundled)}
+            ${legPlaque(c.leg2, 'leg2', true)}
+          </div>
+        </div>
+        ${breakdown(c)}
       </div>`;
   }
 
-  function renderCard(g) {
-    const el = document.getElementById('card-' + g.id);
-    el.classList.toggle('collapsed', !!state[g.id].collapsed);
-    el.innerHTML = cardHTML(g);
+  function renderCart() {
+    const box = document.getElementById('cart');
+    document.getElementById('cart-title').textContent = cart.length ? 'Корзина · ' + cart.length : 'Корзина';
+    if (!cart.length) {
+      box.innerHTML = '<div class="cart-empty">Корзина пуста. Соберите маршрут выше и нажмите «Добавить».</div>';
+      return;
+    }
+    box.innerHTML = cart.map(e =>
+      `<section class="group-card${e.open ? '' : ' collapsed'}" data-uid="${e.uid}">${cartCardHTML(e)}</section>`).join('');
   }
 
   function renderSummary() {
-    let sum = 0, missing = 0;
+    let sum = 0;
     document.getElementById('summary-groups').innerHTML = groups.map(g => {
-      const c = calc(g);
-      if (c.total == null) missing++; else sum += c.total;
-      return `<div class="summary-group"><div class="n">${esc(g.name)}</div>
-        <div class="p${c.total == null ? ' unk' : ''}">${c.total == null ? 'цена уточняется' : fmt(c.total)}</div></div>`;
+      const e = cart.find(x => x.st.gid === g.id);
+      const t = e ? calc(e.st).total : null;
+      if (t != null) sum += t;
+      return `<div class="summary-group${e ? '' : ' none'}"><div class="n">${esc(g.name)}</div>
+        <div class="p">${fmt(t || 0)}</div></div>`;
     }).join('');
     const label = document.getElementById('total-label');
-    label.innerHTML = missing
-      ? `Итого <span class="inc">(неполная: без ${missing} из ${groups.length} групп)</span>`
-      : 'Итого за всех';
-    document.getElementById('grand-total').textContent = fmt(sum);
+    label.textContent = cart.length ? `Итого по корзине (${cart.length})` : 'Корзина пуста';
+    document.getElementById('grand-total').textContent = cart.length ? fmt(sum) : '—';
     document.body.style.paddingBottom = (document.getElementById('summary').offsetHeight + 16) + 'px';
   }
 
-  // ---------- события ----------
-  document.getElementById('groups').addEventListener('click', e => {
-    const btn = e.target.closest('[data-toggle]');
-    if (!btn) return;
-    const gid = btn.dataset.toggle;
-    state[gid].collapsed = !state[gid].collapsed;
-    renderCard(groups.find(x => x.id === gid));
-    const again = document.querySelector(`[data-toggle="${gid}"]`);
-    if (again) again.focus();
-  });
+  function renderAll() { renderBuilder(); renderCart(); renderSummary(); }
 
-  document.getElementById('groups').addEventListener('change', e => {
-    const el = e.target, gid = el.dataset.g, f = el.dataset.f;
-    if (!gid) return;
-    const st = state[gid], v = el.value;
-    if (f === 'start') {
+  // ---------- события ----------
+  document.getElementById('builder').addEventListener('change', e => {
+    const el = e.target, f = el.dataset.f;
+    if (!f) return;
+    const st = draft, v = el.value;
+    if (f === 'gid') {
+      draft = newDraft(v || null);        // выбор пары сбрасывает форму под старт пары
+      if (!v) { draft.start = st.start; draft.outHub = draft.backHub = draft.end = st.start; draft.outId = draft.backId = null; ensure(draft); }
+    } else if (f === 'start') {
       st.start = v;
       if (st.auto.outHub) st.outHub = v;
       if (st.auto.backHub) st.backHub = st.outHub;
@@ -421,11 +588,49 @@
     } else if (f === 'leg1' || f === 'leg2') {
       st.legOpt[el.dataset.key] = v;
     }
-    ensure(gid);
-    const g = groups.find(x => x.id === gid);
-    renderCard(g);
-    renderSummary();
-    const again = document.querySelector(`[data-g="${gid}"][data-f="${f}"]`);
+    ensure(draft);
+    saveDraft();
+    renderBuilder();
+    const again = document.querySelector(`#builder [data-f="${f}"]`);
+    if (again) again.focus();
+  });
+
+  document.getElementById('builder').addEventListener('click', e => {
+    if (!e.target.closest('#add')) return;
+    const c = calc(draft);
+    if (c.total == null || !draft.gid) return;      // без пары добавлять нельзя
+    if (cart.some(x => x.st.gid === draft.gid)) return;
+    cart.push({ uid: ++uidSeq, open: false, st: JSON.parse(JSON.stringify(draft)) });
+    save();
+    draft = newDraft(null);
+    saveDraft();
+    renderAll();
+    const sel = document.querySelector('#builder [data-f="gid"]') || document.querySelector('#cart [data-toggle]');
+    if (sel) sel.focus();
+  });
+
+  document.getElementById('cart').addEventListener('click', e => {
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      const uid = +del.dataset.del;
+      const idx = cart.findIndex(x => x.uid === uid);
+      if (idx < 0) return;
+      cart.splice(idx, 1);
+      save();
+      // пара снова доступна в конструкторе; черновик не сбрасываем
+      renderAll();
+      const next = document.querySelector('#cart .trash') || document.getElementById('add');
+      if (next) next.focus();
+      return;
+    }
+    const btn = e.target.closest('[data-toggle]');
+    if (!btn) return;
+    const uid = +btn.dataset.toggle;
+    const item = cart.find(x => x.uid === uid);
+    if (!item) return;
+    item.open = !item.open;
+    renderCart();
+    const again = document.querySelector(`[data-toggle="${uid}"]`);
     if (again) again.focus();
   });
 
@@ -434,10 +639,9 @@
   document.getElementById('title').textContent = meta.title;
   const total = groups.reduce((s, g) => s + g.size, 0);
   document.getElementById('subtitle').textContent = meta.dates + ' · ' + people(total);
-  const box = document.getElementById('groups');
-  box.innerHTML = groups.map(g => `<section class="group-card" id="card-${g.id}"></section>`).join('');
-  groups.forEach(renderCard);
-  renderSummary();
+  load();
+  loadDraft();
+  renderAll();
 })().catch(err => {
   console.error(err);
   document.body.innerHTML = '<div style="padding:40px;color:#dc2626">Не удалось загрузить данные: ' + err.message + '</div>';
