@@ -86,6 +86,13 @@
   .plaque .price small { font-weight: 400; color: var(--muted); font-size: 11px; }
   .plaque a { font-size: 12px; color: var(--accent); margin-left: 8px; }
   .chip.ok { color: #047857; background: #e6f7ef; }
+  .fl { margin-top: 4px; font-size: 12px; line-height: 1.3; color: #334155; }
+  .fl-leg sup { color: var(--muted); font-size: 10px; margin-left: 1px; }
+  .fl-dim { color: var(--muted); }
+  .plaque .fl a, .plaque .meta a { margin-left: 0; font-size: inherit; }
+  .fl-lay { padding-left: 10px; color: var(--muted); }
+  .fl-lay.warn { color: #b45309; }
+  .fl-lay.danger { color: #b91c1c; font-weight: 600; }
   .chip {
     display: inline-block; font-size: 11px; font-weight: 500; color: #b45309;
     background: #fff4e5; border-radius: 6px; padding: 1px 7px; margin-top: 4px;
@@ -178,6 +185,46 @@
   };
   const stopsText = n => n === 0 ? 'прямой' : n + (n === 1 ? ' пересадка' : n < 5 ? ' пересадки' : ' пересадок');
   const groupOf = id => groups.find(g => g.id === id) || null;
+
+  // ---------- детали рейсов (flights / layovers в сегменте) ----------
+  const durText = m => {
+    const h = Math.floor(m / 60), mm = m % 60;
+    return h ? h + '\u00a0ч' + (mm ? '\u00a0' + mm + '\u00a0мин' : '') : mm + '\u00a0мин';
+  };
+  const hhmm = s => s.slice(11, 16);
+  const dayShift = (a, b) => {
+    const d = Math.round((Date.parse(b.slice(0, 10)) - Date.parse(a.slice(0, 10))) / 864e5);
+    return d > 0 ? '<sup>+' + d + '</sup>' : '';
+  };
+  // ссылка на схему салона seatmaps.com хранится в самом рейсе (flight.seatmap)
+  const aircraftHTML = f => f.seatmap
+    ? `<a href="${esc(f.seatmap)}" target="_blank" rel="noopener">${esc(f.aircraft)}</a>` : esc(f.aircraft);
+  // один рейс: «KBV 22:00 → BKK 23:30 · Airbus A319»
+  const flightLine = f => `${esc(f.from)} ${hhmm(f.dep)} → ${esc(f.to)} ${hhmm(f.arr)}${dayShift(f.dep, f.arr)}` +
+    (f.aircraft ? ` <span class="fl-dim">· ${aircraftHTML(f)}</span>` : '');
+  function layoverLine(y) {
+    const tags = [];
+    if (y.selfTransfer) tags.push('самостоятельная пересадка');
+    if (y.night) tags.push('ночью');
+    if (y.changeAirport) tags.push('смена аэропорта');
+    const cls = y.selfTransfer ? ' danger' : (y.night || y.changeAirport ? ' warn' : '');
+    return `<div class="fl-lay${cls}">↳ ${durText(y.minutes)} · ${esc(y.city)} (${esc(y.airport)})${tags.length ? ' · ' + tags.join(' · ') : ''}</div>`;
+  }
+  function flightDetails(seg) {
+    if (!seg.flights || !seg.flights.length) return '';
+    const lays = seg.layovers || [];
+    const rows = seg.flights.map((f, i) =>
+      `<div class="fl-leg">${flightLine(f)}</div>${lays[i] ? layoverLine(lays[i]) : ''}`);
+    return `<div class="fl">${rows.join('')}</div>`;
+  }
+  // «Справочно: 23.03 KBV 22:00 → BKK 23:30 · Airbus A319» — без дублирования времени
+  function refLine(r) {
+    if (!r || !r.date) return '';
+    const body = r.flights && r.flights.length
+      ? r.flights.map(flightLine).join('; ')
+      : `${r.dep} → ${r.arr}`;
+    return `<div class="meta">Справочно: ${shortDate(r.date)} ${body}</div>`;
+  }
 
   // ---------- данные ----------
   const segOf = (v, hub) => v ? v.segments[hub] || null : null;
@@ -389,7 +436,7 @@
       ? `<div class="field" style="margin:6px 0"><select data-f="${field}" data-key="${esc(l.key)}">${
           l.options.map(x => `<option value="${x.id}"${x.id === o.id ? ' selected' : ''}>${esc(x.mode)} · ${esc(x.carrier)} — ${fmt(x.price)}</option>`).join('')
         }</select></div>` : '';
-    const ref = l.ref ? `<div class="meta">Справочно: ${shortDate(l.ref.date)} ${l.ref.dep} → ${l.ref.arr}</div>` : '';
+    const ref = refLine(l.ref);
     const est = o.estimate ? `<div class="chip">ориентировочно, по аналогии с рейсами в Пермь</div>` : '';
     const link = o.link ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">Билет</a>` : '';
     return `<div class="plaque leg"><div class="route">${esc(l.a)} → ${esc(l.b)} · ${esc(o.mode)}, ${esc(o.carrier)}</div>
@@ -405,7 +452,7 @@
     if (k.free) {
       return `<div class="plaque leg"><div class="route">Краби → ${esc(k.hub)} · условно бесплатно</div></div>`;
     }
-    const ref = k.date ? `<div class="meta">Справочно: ${shortDate(k.date)} ${k.dep} → ${k.arr}</div>` : '';
+    const ref = refLine(k);
     const link = k.link ? `<a href="${esc(k.link)}" target="_blank" rel="noopener">Билет</a>` : '';
     return `<div class="plaque leg"><div class="route">Краби → ${esc(k.hub)} · Самолёт, ${esc(k.carrier)}</div>${ref}
       <div class="price-line"><span>${link}</span><span class="price">${fmt(k.price)} <small>на 1 чел.</small></span></div></div>`;
@@ -431,6 +478,7 @@
         <span class="${seg.easy ? 'ok' : 'bad'}">${seg.easy ? 'лёгкая пересадка' : 'сложная пересадка'}</span></div>
       ${seg.note ? `<div class="note">${esc(seg.note)}</div>` : ''}
       ${seg.nights ? `<div class="note">Ночей в пути: ${seg.nights}</div>` : ''}
+      ${flightDetails(seg)}
       ${chip}
       <div class="price-line"><span>${links}</span><span class="price">${fmt(use.price)} <small>на 1 чел.</small></span></div>
     </div>`;

@@ -74,12 +74,38 @@
               "Пермь→Москва": {
                 "date": "11.03.2027",
                 "dep": "16:00",
-                "arr": "16:15"
+                "arr": "16:15",
+                "flights": [
+                  {
+                    "no": "SU1203",
+                    "from": "PEE",
+                    "to": "SVO",
+                    "dep": "2027-03-11T16:00",
+                    "arr": "2027-03-11T16:15",
+                    "aircraft": "Airbus A320",
+                    "baggage": null,
+                    "handKg": 10,
+                    "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a320/"
+                  }
+                ]
               },
               "Москва→Пермь": {
                 "date": "24.03.2027",
                 "dep": "15:20",
-                "arr": "19:25"
+                "arr": "19:25",
+                "flights": [
+                  {
+                    "no": "SU1768",
+                    "from": "SVO",
+                    "to": "PEE",
+                    "dep": "2027-03-24T15:20",
+                    "arr": "2027-03-24T19:25",
+                    "aircraft": "Airbus A320",
+                    "baggage": null,
+                    "handKg": 10,
+                    "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a320/"
+                  }
+                ]
               }
             }
           }
@@ -162,12 +188,38 @@
               "Питер→Москва": {
                 "date": "11.03.2027",
                 "dep": "18:45",
-                "arr": "20:20"
+                "arr": "20:20",
+                "flights": [
+                  {
+                    "no": "S71016",
+                    "from": "LED",
+                    "to": "DME",
+                    "dep": "2027-03-11T18:45",
+                    "arr": "2027-03-11T20:20",
+                    "aircraft": "Airbus A321",
+                    "baggage": null,
+                    "handKg": 10,
+                    "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/airbus-a321/"
+                  }
+                ]
               },
               "Москва→Питер": {
                 "date": "24.03.2027",
                 "dep": "16:00",
-                "arr": "17:45"
+                "arr": "17:45",
+                "flights": [
+                  {
+                    "no": "S71015",
+                    "from": "DME",
+                    "to": "LED",
+                    "dep": "2027-03-24T16:00",
+                    "arr": "2027-03-24T17:45",
+                    "aircraft": "Airbus A321",
+                    "baggage": null,
+                    "handKg": 10,
+                    "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/airbus-a321/"
+                  }
+                ]
               }
             }
           }
@@ -239,7 +291,23 @@
         "link": "https://avs.io/6FT79",
         "date": "23.03.2027",
         "dep": "22:00",
-        "arr": "23:30"
+        "arr": "23:30",
+        "flights": [
+          {
+            "no": "PG264",
+            "from": "KBV",
+            "to": "BKK",
+            "dep": "2027-03-23T22:00",
+            "arr": "2027-03-23T23:30",
+            "aircraft": "Airbus A319",
+            "baggage": {
+              "pcs": 1,
+              "kg": 20
+            },
+            "handKg": 7,
+            "seatmap": "https://seatmaps.com/ru/airlines/pg-bangkok-airways/airbus-a319/"
+          }
+        ]
       },
       "Куала-Лумпур": {
         "carrier": "AirAsia",
@@ -247,7 +315,20 @@
         "link": "https://avs.io/6FT6z",
         "date": "23.03.2027",
         "dep": "11:50",
-        "arr": "14:20"
+        "arr": "14:20",
+        "flights": [
+          {
+            "no": "AK867",
+            "from": "KBV",
+            "to": "KUL",
+            "dep": "2027-03-23T11:50",
+            "arr": "2027-03-23T14:20",
+            "aircraft": "Airbus A320",
+            "baggage": null,
+            "handKg": 7,
+            "seatmap": "https://seatmaps.com/ru/airlines/ak-airasia/airbus-a320/"
+          }
+        ]
       },
       "Пхукет": {
         "carrier": null,
@@ -274,7 +355,20 @@
             "https://avs.io/6Egix"
           ],
           "price": 45960,
-          "dest": "Бангкок"
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "SU272",
+              "from": "SVO",
+              "to": "BKK",
+              "dep": "2027-03-11T21:35",
+              "arr": "2027-03-12T10:40",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/boeing-777-300er/"
+            }
+          ]
         },
         "Питер": {
           "date": "08.03.2027",
@@ -288,7 +382,20 @@
             "https://avs.io/6EgnJ"
           ],
           "price": 49415,
-          "dest": "Бангкок"
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "SU620",
+              "from": "LED",
+              "to": "BKK",
+              "dep": "2027-03-08T00:10",
+              "arr": "2027-03-08T14:10",
+              "aircraft": "Airbus A330-300",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a330-300/"
+            }
+          ]
         },
         "Екатеринбург": {
           "date": "12.03.2027",
@@ -302,7 +409,20 @@
             "https://avs.io/6Egvf"
           ],
           "price": 46504,
-          "dest": "Бангкок"
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "SU652",
+              "from": "SVX",
+              "to": "BKK",
+              "dep": "2027-03-12T02:30",
+              "arr": "2027-03-12T12:50",
+              "aircraft": "Airbus A330-300",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a330-300/"
+            }
+          ]
         }
       }
     },
@@ -323,7 +443,47 @@
           ],
           "price": 27693,
           "dest": "Бангкок",
-          "note": "10ч в Пекине"
+          "note": "10ч в Пекине",
+          "flights": [
+            {
+              "no": "HU7986",
+              "from": "SVO",
+              "to": "PEK",
+              "dep": "2027-03-11T20:05",
+              "arr": "2027-03-12T08:55",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/hu-hainan-airlines/airbus-a330-300/"
+            },
+            {
+              "no": "HU7995",
+              "from": "PEK",
+              "to": "BKK",
+              "dep": "2027-03-12T19:15",
+              "arr": "2027-03-12T23:35",
+              "aircraft": "Airbus A321neo",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/hu-hainan-airlines/airbus-a321neo/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PEK",
+              "city": "Пекин",
+              "minutes": 620,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "10.03.2027",
@@ -338,7 +498,47 @@
           ],
           "price": 34291,
           "dest": "Бангкок",
-          "note": "10ч в Пекине"
+          "note": "10ч в Пекине",
+          "flights": [
+            {
+              "no": "HU7966",
+              "from": "LED",
+              "to": "PEK",
+              "dep": "2027-03-10T20:10",
+              "arr": "2027-03-11T09:15",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/hu-hainan-airlines/airbus-a330-300/"
+            },
+            {
+              "no": "HU7995",
+              "from": "PEK",
+              "to": "BKK",
+              "dep": "2027-03-11T19:15",
+              "arr": "2027-03-11T23:35",
+              "aircraft": "Airbus A321neo",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/hu-hainan-airlines/airbus-a321neo/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PEK",
+              "city": "Пекин",
+              "minutes": 600,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -359,7 +559,41 @@
           ],
           "price": 35407,
           "dest": "Бангкок",
-          "note": "7ч Новосибирск ночью, 12 числа на 7к дешевле"
+          "note": "7ч Новосибирск ночью, 12 числа на 7к дешевле",
+          "flights": [
+            {
+              "no": "S72507",
+              "from": "DME",
+              "to": "OVB",
+              "dep": "2027-03-09T13:40",
+              "arr": "2027-03-09T21:50",
+              "aircraft": "Boeing 737-800",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            },
+            {
+              "no": "S75703",
+              "from": "OVB",
+              "to": "BKK",
+              "dep": "2027-03-10T05:20",
+              "arr": "2027-03-10T14:55",
+              "aircraft": "Boeing 737-800",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "OVB",
+              "city": "Новосибирск",
+              "minutes": 450,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "09.03.2027",
@@ -374,7 +608,41 @@
           ],
           "price": 35758,
           "dest": "Бангкок",
-          "note": "4-7ч Новосибирск ночью"
+          "note": "4-7ч Новосибирск ночью",
+          "flights": [
+            {
+              "no": "S75004",
+              "from": "LED",
+              "to": "OVB",
+              "dep": "2027-03-09T13:30",
+              "arr": "2027-03-09T21:55",
+              "aircraft": "Airbus A321",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/airbus-a321/"
+            },
+            {
+              "no": "S75703",
+              "from": "OVB",
+              "to": "BKK",
+              "dep": "2027-03-10T05:20",
+              "arr": "2027-03-10T14:55",
+              "aircraft": "Boeing 737-800",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "OVB",
+              "city": "Новосибирск",
+              "minutes": 445,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Пермь": {
           "date": "09.03.2027",
@@ -389,7 +657,41 @@
           ],
           "price": 46365,
           "dest": "Бангкок",
-          "note": "7ч Новосибирск ночью"
+          "note": "7ч Новосибирск ночью",
+          "flights": [
+            {
+              "no": "S75040",
+              "from": "PEE",
+              "to": "OVB",
+              "dep": "2027-03-09T17:10",
+              "arr": "2027-03-09T21:40",
+              "aircraft": "Embraer 170",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/embraer-e170/"
+            },
+            {
+              "no": "S75703",
+              "from": "OVB",
+              "to": "BKK",
+              "dep": "2027-03-10T05:20",
+              "arr": "2027-03-10T14:55",
+              "aircraft": "Boeing 737-800",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "OVB",
+              "city": "Новосибирск",
+              "minutes": 460,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -410,7 +712,47 @@
           ],
           "price": 38599,
           "dest": "Пхукет",
-          "title": "Пхукет, Turkish"
+          "title": "Пхукет, Turkish",
+          "flights": [
+            {
+              "no": "TK416",
+              "from": "VKO",
+              "to": "IST",
+              "dep": "2027-03-12T20:15",
+              "arr": "2027-03-13T00:15",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 20
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/tk-turkish-airlines/airbus-a330-300/"
+            },
+            {
+              "no": "TK172",
+              "from": "IST",
+              "to": "HKT",
+              "dep": "2027-03-13T02:00",
+              "arr": "2027-03-13T15:50",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 20
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/tk-turkish-airlines/airbus-a330-300/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "IST",
+              "city": "Стамбул",
+              "minutes": 105,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "12.03.2027",
@@ -425,7 +767,41 @@
           ],
           "price": 52578,
           "dest": "Пхукет",
-          "title": "Пхукет, Etihad"
+          "title": "Пхукет, Etihad",
+          "flights": [
+            {
+              "no": "EY854",
+              "from": "LED",
+              "to": "AUH",
+              "dep": "2027-03-12T12:00",
+              "arr": "2027-03-12T19:15",
+              "aircraft": "Boeing 787-9",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-9/"
+            },
+            {
+              "no": "EY410",
+              "from": "AUH",
+              "to": "HKT",
+              "dep": "2027-03-12T21:00",
+              "arr": "2027-03-13T06:30",
+              "aircraft": "Boeing 787-10",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-10/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "AUH",
+              "city": "Абу-Даби",
+              "minutes": 105,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Екатеринбург": {
           "date": "12.03.2027",
@@ -440,7 +816,20 @@
           ],
           "price": 52004,
           "dest": "Пхукет",
-          "title": "Пхукет, прямой Aeroflot"
+          "title": "Пхукет, прямой Aeroflot",
+          "flights": [
+            {
+              "no": "SU626",
+              "from": "SVX",
+              "to": "HKT",
+              "dep": "2027-03-12T23:55",
+              "arr": "2027-03-13T10:25",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/boeing-777-300er/"
+            }
+          ]
         }
       }
     },
@@ -461,7 +850,41 @@
           ],
           "price": 35483,
           "dest": "Пхукет",
-          "note": "7ч в Ташкенте"
+          "note": "7ч в Ташкенте",
+          "flights": [
+            {
+              "no": "C6402",
+              "from": "SVO",
+              "to": "TAS",
+              "dep": "2027-03-11T09:15",
+              "arr": "2027-03-11T15:25",
+              "aircraft": "Airbus A320neo",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a320neo/"
+            },
+            {
+              "no": "C6529",
+              "from": "TAS",
+              "to": "HKT",
+              "dep": "2027-03-11T22:35",
+              "arr": "2027-03-12T07:05",
+              "aircraft": "Airbus A321neo",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a321neo/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "TAS",
+              "city": "Ташкент",
+              "minutes": 430,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "11.03.2027",
@@ -476,7 +899,41 @@
           ],
           "price": 36981,
           "dest": "Пхукет",
-          "note": "5ч в Ташкенте"
+          "note": "5ч в Ташкенте",
+          "flights": [
+            {
+              "no": "C6422",
+              "from": "LED",
+              "to": "TAS",
+              "dep": "2027-03-11T11:00",
+              "arr": "2027-03-11T17:45",
+              "aircraft": "Airbus A320neo",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a320neo/"
+            },
+            {
+              "no": "C6529",
+              "from": "TAS",
+              "to": "HKT",
+              "dep": "2027-03-11T22:35",
+              "arr": "2027-03-12T07:05",
+              "aircraft": "Airbus A321neo",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a321neo/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "TAS",
+              "city": "Ташкент",
+              "minutes": 290,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Пермь": {
           "date": "10.03.2027",
@@ -493,7 +950,41 @@
           "price": 45579,
           "dest": "Пхукет",
           "note": "41ч в Ташкенте",
-          "nights": 1
+          "nights": 1,
+          "flights": [
+            {
+              "no": "C6482",
+              "from": "PEE",
+              "to": "TAS",
+              "dep": "2027-03-10T02:15",
+              "arr": "2027-03-10T05:20",
+              "aircraft": "Airbus A320",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a320/"
+            },
+            {
+              "no": "C6529",
+              "from": "TAS",
+              "to": "HKT",
+              "dep": "2027-03-11T22:35",
+              "arr": "2027-03-12T07:05",
+              "aircraft": "Airbus A321neo",
+              "baggage": null,
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/c6-centrum-air/airbus-a321neo/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "TAS",
+              "city": "Ташкент",
+              "minutes": 2475,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": true
+            }
+          ]
         }
       }
     },
@@ -513,7 +1004,47 @@
             "https://avs.io/6FyHQ"
           ],
           "price": 47103,
-          "dest": "Бангкок"
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "EK132",
+              "from": "DME",
+              "to": "DXB",
+              "dep": "2027-03-09T21:45",
+              "arr": "2027-03-10T05:50",
+              "aircraft": "Airbus A380-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/airbus-a380/"
+            },
+            {
+              "no": "EK370",
+              "from": "DXB",
+              "to": "BKK",
+              "dep": "2027-03-10T08:55",
+              "arr": "2027-03-10T18:05",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/boeing-777-300er/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DXB",
+              "city": "Дубай",
+              "minutes": 185,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "09.03.2027",
@@ -527,7 +1058,47 @@
             "https://avs.io/6FyIv"
           ],
           "price": 58323,
-          "dest": "Бангкок"
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "EK176",
+              "from": "LED",
+              "to": "DXB",
+              "dep": "2027-03-09T23:15",
+              "arr": "2027-03-10T07:05",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/boeing-777-300er/"
+            },
+            {
+              "no": "EK370",
+              "from": "DXB",
+              "to": "BKK",
+              "dep": "2027-03-10T08:55",
+              "arr": "2027-03-10T18:05",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/boeing-777-300er/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DXB",
+              "city": "Дубай",
+              "minutes": 110,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -548,11 +1119,87 @@
           ],
           "price": 42069,
           "dest": "Пхукет",
-          "note": "Чартер. Только единым билетом. 11 дней"
+          "note": "Чартер. Только единым билетом. 11 дней",
+          "flights": [
+            {
+              "no": "ZF4065",
+              "from": "PEE",
+              "to": "HKT",
+              "dep": "2027-03-08T22:55",
+              "arr": "2027-03-09T10:05",
+              "aircraft": "Boeing 767-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 10
+              },
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/zf-azur-air/boeing-767-300er/"
+            }
+          ]
         }
       },
       "charter": true,
       "pairWith": "back-8"
+    },
+    {
+      "id": "out-8",
+      "title": "Бангкок, Qatar через Доху",
+      "segments": {
+        "Москва": {
+          "date": "10.03.2027",
+          "time": "16:15",
+          "arrDate": "11.03.2027",
+          "arrTime": "12:15",
+          "airline": "Qatar Airways",
+          "stops": 1,
+          "easy": true,
+          "links": [
+            "https://avs.io/6GSdW"
+          ],
+          "price": 33574,
+          "dest": "Бангкок",
+          "flights": [
+            {
+              "no": "QR340",
+              "from": "SVO",
+              "to": "DOH",
+              "dep": "2027-03-10T16:15",
+              "arr": "2027-03-10T22:45",
+              "aircraft": "Boeing 787-9",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/boeing-787-9/"
+            },
+            {
+              "no": "QR834",
+              "from": "DOH",
+              "to": "BKK",
+              "dep": "2027-03-11T01:50",
+              "arr": "2027-03-11T12:15",
+              "aircraft": "Airbus A380-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/airbus-a380/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DOH",
+              "city": "Доха",
+              "minutes": 185,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
+        }
+      }
     }
   ],
   "back": [
@@ -572,7 +1219,47 @@
             "https://avs.io/6FT8N"
           ],
           "price": 28536,
-          "orig": "Куала-Лумпур"
+          "orig": "Куала-Лумпур",
+          "flights": [
+            {
+              "no": "QR853",
+              "from": "KUL",
+              "to": "DOH",
+              "dep": "2027-03-24T19:55",
+              "arr": "2027-03-24T22:25",
+              "aircraft": "Boeing 787-9",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/boeing-787-9/"
+            },
+            {
+              "no": "QR337",
+              "from": "DOH",
+              "to": "SVO",
+              "dep": "2027-03-25T01:30",
+              "arr": "2027-03-25T08:00",
+              "aircraft": "Boeing 787-9",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/boeing-787-9/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DOH",
+              "city": "Доха",
+              "minutes": 185,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -592,7 +1279,47 @@
             "https://avs.io/6Fc0M"
           ],
           "price": 32261,
-          "orig": "Пхукет"
+          "orig": "Пхукет",
+          "flights": [
+            {
+              "no": "FM832",
+              "from": "HKT",
+              "to": "PVG",
+              "dep": "2027-03-24T00:05",
+              "arr": "2027-03-24T05:55",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 2,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/fm-shanghai-airlines/boeing-737-max-8/"
+            },
+            {
+              "no": "MU247",
+              "from": "PVG",
+              "to": "SVO",
+              "dep": "2027-03-24T09:25",
+              "arr": "2027-03-24T14:35",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 2,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/airbus-a330-300/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PVG",
+              "city": "Шанхай",
+              "minutes": 210,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "24.03.2027",
@@ -607,7 +1334,47 @@
           ],
           "price": 31863,
           "orig": "Пхукет",
-          "note": "8ч ночью в Шанхае"
+          "note": "8ч ночью в Шанхае",
+          "flights": [
+            {
+              "no": "MU8618",
+              "from": "HKT",
+              "to": "PVG",
+              "dep": "2027-03-24T00:05",
+              "arr": "2027-03-24T05:55",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/boeing-737-max-8/"
+            },
+            {
+              "no": "MU259",
+              "from": "PVG",
+              "to": "LED",
+              "dep": "2027-03-24T13:45",
+              "arr": "2027-03-24T19:05",
+              "aircraft": "Airbus A330-200",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/airbus-a330-200/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PVG",
+              "city": "Шанхай",
+              "minutes": 470,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -627,7 +1394,47 @@
             "https://avs.io/6FoCT"
           ],
           "price": 32360,
-          "orig": "Бангкок"
+          "orig": "Бангкок",
+          "flights": [
+            {
+              "no": "MU8654",
+              "from": "BKK",
+              "to": "PVG",
+              "dep": "2027-03-25T05:05",
+              "arr": "2027-03-25T10:20",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/boeing-737-max-8/"
+            },
+            {
+              "no": "MU591",
+              "from": "PVG",
+              "to": "SVO",
+              "dep": "2027-03-25T11:50",
+              "arr": "2027-03-25T17:05",
+              "aircraft": "Airbus A330-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/airbus-a330-300/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PVG",
+              "city": "Шанхай",
+              "minutes": 90,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "24.03.2027",
@@ -641,7 +1448,47 @@
             "https://avs.io/6FoIb"
           ],
           "price": 31953,
-          "orig": "Бангкок"
+          "orig": "Бангкок",
+          "flights": [
+            {
+              "no": "MU8654",
+              "from": "BKK",
+              "to": "PVG",
+              "dep": "2027-03-24T05:05",
+              "arr": "2027-03-24T10:20",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/boeing-737-max-8/"
+            },
+            {
+              "no": "MU259",
+              "from": "PVG",
+              "to": "LED",
+              "dep": "2027-03-24T13:45",
+              "arr": "2027-03-24T19:05",
+              "aircraft": "Airbus A330-200",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/mu-china-eastern/airbus-a330-200/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "PVG",
+              "city": "Шанхай",
+              "minutes": 205,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -667,7 +1514,20 @@
             "links": [
               "https://avs.io/6FoSy"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "SU271",
+              "from": "BKK",
+              "to": "SVO",
+              "dep": "2027-03-25T10:15",
+              "arr": "2027-03-25T16:25",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/boeing-777-300er/"
+            }
+          ]
         },
         "Питер": {
           "date": "26.03.2027",
@@ -687,7 +1547,20 @@
             "links": [
               "https://avs.io/6Fp4w"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "SU621",
+              "from": "BKK",
+              "to": "LED",
+              "dep": "2027-03-26T14:55",
+              "arr": "2027-03-26T22:10",
+              "aircraft": "Airbus A330-300",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a330-300/"
+            }
+          ]
         },
         "Екатеринбург": {
           "date": "25.03.2027",
@@ -707,7 +1580,20 @@
             "links": [
               "https://avs.io/6Fp6T"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "SU653",
+              "from": "BKK",
+              "to": "SVX",
+              "dep": "2027-03-25T16:05",
+              "arr": "2027-03-25T23:15",
+              "aircraft": "Airbus A330-300",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/airbus-a330-300/"
+            }
+          ]
         }
       },
       "bundleWith": [
@@ -736,7 +1622,47 @@
             "links": [
               "https://avs.io/6Fp8i"
             ]
-          }
+          },
+          "flights": [
+            {
+              "from": "BKK",
+              "to": "IKT",
+              "dep": "2027-03-23T16:30",
+              "arr": "2027-03-23T23:55",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S76310",
+              "aircraft": "Boeing 737-800",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            },
+            {
+              "from": "IKT",
+              "to": "DME",
+              "dep": "2027-03-24T09:25",
+              "arr": "2027-03-24T10:55",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S73018",
+              "aircraft": "Airbus A320",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/airbus-a320/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "IKT",
+              "city": "Иркутск",
+              "minutes": 570,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "23.03.2027",
@@ -756,7 +1682,47 @@
             "links": [
               "https://avs.io/6Fp9e"
             ]
-          }
+          },
+          "flights": [
+            {
+              "from": "BKK",
+              "to": "IKT",
+              "dep": "2027-03-23T16:30",
+              "arr": "2027-03-23T23:55",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S76310",
+              "aircraft": "Boeing 737-800",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            },
+            {
+              "from": "IKT",
+              "to": "LED",
+              "dep": "2027-03-24T09:45",
+              "arr": "2027-03-24T11:25",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S76409",
+              "aircraft": "Boeing 737-800",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "IKT",
+              "city": "Иркутск",
+              "minutes": 590,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Пермь": {
           "date": "24.03.2027",
@@ -776,7 +1742,47 @@
             "links": [
               "https://avs.io/6Fpbd"
             ]
-          }
+          },
+          "flights": [
+            {
+              "from": "BKK",
+              "to": "OVB",
+              "dep": "2027-03-24T15:55",
+              "arr": "2027-03-25T01:50",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S75704",
+              "aircraft": "Boeing 737-800",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/boeing-737-800/"
+            },
+            {
+              "from": "OVB",
+              "to": "PEE",
+              "dep": "2027-03-25T15:45",
+              "arr": "2027-03-25T16:35",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "no": "S75039",
+              "aircraft": "Embraer 170",
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/s7-s7-airlines/embraer-e170/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "OVB",
+              "city": "Новосибирск",
+              "minutes": 835,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       },
       "bundleWith": [
@@ -805,7 +1811,47 @@
             "links": [
               "https://avs.io/6Fpr8"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "FZ1336",
+              "from": "DMK",
+              "to": "DXB",
+              "dep": "2027-03-24T23:00",
+              "arr": "2027-03-25T03:00",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/fz-flydubai/boeing-737-max-8/"
+            },
+            {
+              "no": "EK133",
+              "from": "DXB",
+              "to": "DME",
+              "dep": "2027-03-25T08:35",
+              "arr": "2027-03-25T14:35",
+              "aircraft": "Airbus A380-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/airbus-a380/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DXB",
+              "city": "Дубай",
+              "minutes": 335,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "24.03.2027",
@@ -825,7 +1871,47 @@
             "links": [
               "https://avs.io/6FptF"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "EK2277",
+              "from": "DMK",
+              "to": "DXB",
+              "dep": "2027-03-24T23:00",
+              "arr": "2027-03-25T03:00",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/fz-flydubai/boeing-737-max-8/"
+            },
+            {
+              "no": "EK175",
+              "from": "DXB",
+              "to": "LED",
+              "dep": "2027-03-25T15:10",
+              "arr": "2027-03-25T21:25",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/boeing-777-300er/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DXB",
+              "city": "Дубай",
+              "minutes": 730,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       },
       "bundleWith": [
@@ -854,7 +1940,20 @@
             "links": [
               "https://avs.io/6FIjL"
             ]
-          }
+          },
+          "flights": [
+            {
+              "no": "SU627",
+              "from": "HKT",
+              "to": "SVX",
+              "dep": "2027-03-26T13:45",
+              "arr": "2027-03-26T21:35",
+              "aircraft": "Boeing 777-300ER",
+              "baggage": null,
+              "handKg": 10,
+              "seatmap": "https://seatmaps.com/ru/airlines/su-aeroflot/boeing-777-300er/"
+            }
+          ]
         }
       },
       "bundleWith": [
@@ -878,7 +1977,23 @@
           ],
           "price": 42069,
           "orig": "Пхукет",
-          "note": "Чартер. Только единым билетом. 11 дней"
+          "note": "Чартер. Только единым билетом. 11 дней",
+          "flights": [
+            {
+              "no": "ZF4066",
+              "from": "HKT",
+              "to": "PEE",
+              "dep": "2027-03-20T12:25",
+              "arr": "2027-03-20T20:00",
+              "aircraft": "Boeing 767-300",
+              "baggage": {
+                "pcs": 1,
+                "kg": 10
+              },
+              "handKg": null,
+              "seatmap": "https://seatmaps.com/ru/airlines/zf-azur-air/boeing-767-300er/"
+            }
+          ]
         }
       },
       "charter": true,
@@ -900,7 +2015,41 @@
             "https://avs.io/6FT9E"
           ],
           "price": 30066,
-          "orig": "Куала-Лумпур"
+          "orig": "Куала-Лумпур",
+          "flights": [
+            {
+              "no": "EY489",
+              "from": "KUL",
+              "to": "AUH",
+              "dep": "2027-03-24T09:30",
+              "arr": "2027-03-24T12:50",
+              "aircraft": "Boeing 787-10",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-10/"
+            },
+            {
+              "no": "EY843",
+              "from": "AUH",
+              "to": "SVO",
+              "dep": "2027-03-24T14:30",
+              "arr": "2027-03-24T19:30",
+              "aircraft": "Boeing 787-10",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-10/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "AUH",
+              "city": "Абу-Даби",
+              "minutes": 100,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         },
         "Питер": {
           "date": "24.03.2027",
@@ -915,7 +2064,41 @@
           ],
           "price": 37889,
           "orig": "Куала-Лумпур",
-          "note": "14ч в Абу-Даби"
+          "note": "14ч в Абу-Даби",
+          "flights": [
+            {
+              "no": "EY489",
+              "from": "KUL",
+              "to": "AUH",
+              "dep": "2027-03-24T09:30",
+              "arr": "2027-03-24T12:50",
+              "aircraft": "Boeing 787-10",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-10/"
+            },
+            {
+              "no": "EY853",
+              "from": "AUH",
+              "to": "LED",
+              "dep": "2027-03-25T02:55",
+              "arr": "2027-03-25T08:25",
+              "aircraft": "Boeing 787-9",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-9/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "AUH",
+              "city": "Абу-Даби",
+              "minutes": 845,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -935,7 +2118,47 @@
             "https://avs.io/6FT97"
           ],
           "price": 29319,
-          "orig": "Куала-Лумпур"
+          "orig": "Куала-Лумпур",
+          "flights": [
+            {
+              "no": "EK347",
+              "from": "KUL",
+              "to": "DXB",
+              "dep": "2027-03-24T18:25",
+              "arr": "2027-03-24T21:45",
+              "aircraft": "Airbus A380-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ek-emirates/airbus-a380/"
+            },
+            {
+              "no": "FZ969",
+              "from": "DXB",
+              "to": "VKO",
+              "dep": "2027-03-25T00:35",
+              "arr": "2027-03-25T06:50",
+              "aircraft": "Boeing 737 MAX 8",
+              "baggage": {
+                "pcs": 1,
+                "kg": 25
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/fz-flydubai/boeing-737-max-8/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DXB",
+              "city": "Дубай",
+              "minutes": 170,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -955,7 +2178,41 @@
             "https://avs.io/6FTeZ"
           ],
           "price": 37889,
-          "orig": "Куала-Лумпур"
+          "orig": "Куала-Лумпур",
+          "flights": [
+            {
+              "no": "EY487",
+              "from": "KUL",
+              "to": "AUH",
+              "dep": "2027-03-24T21:40",
+              "arr": "2027-03-25T00:50",
+              "aircraft": "Boeing 787-10",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-10/"
+            },
+            {
+              "no": "EY853",
+              "from": "AUH",
+              "to": "LED",
+              "dep": "2027-03-25T02:55",
+              "arr": "2027-03-25T08:25",
+              "aircraft": "Boeing 787-9",
+              "baggage": null,
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/ey-etihad-airways/boeing-787-9/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "AUH",
+              "city": "Абу-Даби",
+              "minutes": 125,
+              "night": true,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -975,7 +2232,47 @@
             "https://avs.io/6FTeO"
           ],
           "price": 37551,
-          "orig": "Куала-Лумпур"
+          "orig": "Куала-Лумпур",
+          "flights": [
+            {
+              "no": "TK63",
+              "from": "KUL",
+              "to": "IST",
+              "dep": "2027-03-24T08:15",
+              "arr": "2027-03-24T14:40",
+              "aircraft": "Airbus A350-900",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/tk-turkish-airlines/airbus-a350-900/"
+            },
+            {
+              "no": "TK399",
+              "from": "IST",
+              "to": "LED",
+              "dep": "2027-03-24T19:45",
+              "arr": "2027-03-24T23:35",
+              "aircraft": "Boeing 737-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 23
+              },
+              "handKg": 8,
+              "seatmap": "https://seatmaps.com/ru/airlines/tk-turkish-airlines/boeing-737-800/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "IST",
+              "city": "Стамбул",
+              "minutes": 305,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     },
@@ -995,7 +2292,47 @@
             "https://avs.io/6FoDt"
           ],
           "price": 35106,
-          "orig": "Бангкок"
+          "orig": "Бангкок",
+          "flights": [
+            {
+              "no": "QR837",
+              "from": "BKK",
+              "to": "DOH",
+              "dep": "2027-03-25T02:00",
+              "arr": "2027-03-25T05:05",
+              "aircraft": "Airbus A380-800",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/airbus-a380/"
+            },
+            {
+              "no": "QR339",
+              "from": "DOH",
+              "to": "SVO",
+              "dep": "2027-03-25T08:25",
+              "arr": "2027-03-25T14:55",
+              "aircraft": "Boeing 787-9",
+              "baggage": {
+                "pcs": 1,
+                "kg": 30
+              },
+              "handKg": 7,
+              "seatmap": "https://seatmaps.com/ru/airlines/qr-qatar-airways/boeing-787-9/"
+            }
+          ],
+          "layovers": [
+            {
+              "airport": "DOH",
+              "city": "Доха",
+              "minutes": 200,
+              "night": false,
+              "changeAirport": false,
+              "selfTransfer": false
+            }
+          ]
         }
       }
     }
